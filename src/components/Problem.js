@@ -24,11 +24,12 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 9db90b86958ec1d36946adad73228a31ec636094`
+        Authorization: `Bearer a45a45ffc4354b22d1098f1c56a0f852b79289d2`
       }
     })
       .then(res => {
         res = res.data.result.data.content;
+
         //   console.log(res);
         this.setState({
           pname: res["problemName"],
@@ -39,7 +40,7 @@ class Problem extends React.Component {
           author: res["author"],
           successfulSubmissions: res["successfulSubmissions"],
           totalSubmissions: res["totalSubmissions"],
-          lag: res["languagesSupported"]
+          languages: res["languagesSupported"]
         });
       })
       .catch(err => {
@@ -53,6 +54,7 @@ class Problem extends React.Component {
   };
 
   render() {
+    console.log(this.state.languages[0]);
     return (
       <>
         <h1>{this.state.pname}</h1>
@@ -62,8 +64,8 @@ class Problem extends React.Component {
           }}
         ></div>
         <h1>successful Submissions - {this.state.successfulSubmissions}</h1>
-        <IDE></IDE>
-        <button onClick={this.handleSubmit}>Submit</button>
+
+        <IDE languages={this.state.languages}></IDE>
       </>
     );
   }
