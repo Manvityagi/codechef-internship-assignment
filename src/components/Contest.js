@@ -34,7 +34,7 @@ class Contest extends React.Component {
     let problemCode = event.target.getAttribute("value");
     console.log(event.target.getAttribute("value"));
     this.props.history.push(
-      `contests/${this.contestCode}/problems/${problemCode}`
+      `/contests/${this.contestCode}/problems/${problemCode}`
     );
   };
 

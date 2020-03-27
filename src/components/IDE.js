@@ -31,7 +31,6 @@ class IDE extends React.Component {
         Accept: "application/json",
         Authorization: `Bearer 9db90b86958ec1d36946adad73228a31ec636094`
       },
-      timeout:1,
       data: {
         sourceCode: this.state.sourceCode,
         language: this.state.language,
@@ -57,7 +56,7 @@ class IDE extends React.Component {
             console.log("Couldnt Run to find status");
             console.log(err.response);
           });
-      })
+      },1000)
       .catch(err => {
         console.log("Couldnt Run 1");
         console.log(err);
