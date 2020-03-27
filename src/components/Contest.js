@@ -14,7 +14,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer f1a0593c6e762855d5ea68f5ebf8c9fa7bd4d80b`
+        Authorization: `Bearer 6db79cf384e937dabb7ad25ac915c59d92013fbd`
       }
     })
       .then(res => {

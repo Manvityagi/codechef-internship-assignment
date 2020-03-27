@@ -24,7 +24,7 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer f1a0593c6e762855d5ea68f5ebf8c9fa7bd4d80b`
+        Authorization: `Bearer 6db79cf384e937dabb7ad25ac915c59d92013fbd`
       }
     })
       .then(res => {
@@ -39,7 +39,7 @@ class Problem extends React.Component {
           author: res["author"],
           successfulSubmissions: res["successfulSubmissions"],
           totalSubmissions: res["totalSubmissions"],
-          lag: res["languagesSupported"]
+          languages: res["languagesSupported"]
         });
       })
       .catch(err => {
@@ -62,8 +62,7 @@ class Problem extends React.Component {
           }}
         ></div>
         <h1>successful Submissions - {this.state.successfulSubmissions}</h1>
-        <IDE></IDE>
-        <button onClick={this.handleSubmit}>Submit</button>
+        <IDE languages={this.state.languages}></IDE>
       </>
     );
   }
