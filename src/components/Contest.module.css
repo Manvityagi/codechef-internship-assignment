@@ -126,6 +126,10 @@ td {
   padding: 0.5em 1em;
 }
 
+.problemID{
+  cursor: pointer;
+}
+
 .contest {
   margin-left: 900px;
   border: 1px solid grey;

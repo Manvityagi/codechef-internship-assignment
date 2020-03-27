@@ -16,7 +16,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer af3a54b3c1d0db7f95943cd6767519ca4ccebc91`
+        Authorization: `Bearer 018796eab860d823da8d67fe4189b0973cb0860e`
       }
     })
       .then(res => {
@@ -114,7 +114,7 @@ class Contest extends React.Component {
               <tbody>
                 {this.state.problemList.map(problem => (
                   <tr key={problem.problemCode}>
-                    <td
+                    <td className={classes.problemID}
                       value={problem.problemCode}
                       onClick={this.problemEventHandler}
                     >

@@ -29,7 +29,7 @@ class IDE extends React.Component {
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 9db90b86958ec1d36946adad73228a31ec636094`
+        Authorization: `Bearer 018796eab860d823da8d67fe4189b0973cb0860e`
       },
       data: {
         sourceCode: this.state.sourceCode,
