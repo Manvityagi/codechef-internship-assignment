@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* .parentHeader{
+  width:100%;
+  
+
+} */
+
+.header {
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+  height: 90px;
+  width: 100%;
+}
+
+.himage {
+  height: 300px;
+  width: 300px;
+  margin-left: 350px;
+  position: relative;
+  bottom: 80px;
+}
+
+.login {
+  position: relative;
+  display: inline-block;
+  bottom: 60px;
+  margin-left: 650px;
+}
+
+input {
+  height: 25px;
+}
+button {
+  background-color: #2b88db;
+  color: white;
+  padding: 8px 10px;
+  box-shadow: 1px 5px 3px #888888;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005a9e;
+}
+
+.forget {
+  margin-left: 890px;
+  z-index: 1;
+  position: relative;
+  bottom: 60px;
+  font-size: 15px;
+}
+
+.images {
+  margin-left: 1075px;
+}
+
+.icons {
+  height: 30px;
+  width: 30px;
+  margin: 0;
+  cursor: pointer;
+  bottom: 110px;
+  object-fit: scale-down;
+  position: relative;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.signup a {
+  width: 70px;
+  height: 29px;
+  margin-top: 1px;
+  border-radius: 1px;
+  background-color: #4a90e2 !important;
+  background-image: none;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-shadow: none;
+  border: none;
+  text-decoration: none;
+}
+
+.new.input {
+  position: relative;
+  bottom: 146px;
+  margin-left: 1190px;
+}
+
+.content {
+  margin-left: 350px;
+  margin-right: 350px;
+  margin-top: 100px;
+  box-shadow: -1px 4px 5px 6px rgba(194, 194, 194, 1);
+  padding: 20px;
+}
+
+.end {
+  height: 400px;
+  width: 700px;
+}
+
+main {
+  display: flex;
+}
+
+table {
+  max-width: 100%;
+}
+
+tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+th {
+  background-color: #555;
+  color: #fff;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5em 1em;
+}
+
+.contest {
+  margin-left: 900px;
+  border: 1px solid grey;
+  margin-right: 390px;
+  position: relative;
+  bottom: 290px;
+}
+
+.contest1 {
+  margin-left: 900px;
+  border: 1px solid grey;
+  margin-right: 390px;
+  position: relative;
+  bottom: 260px;
+  height: 150px;
+}
+
+.parent {
+  text-align: center;
+}
