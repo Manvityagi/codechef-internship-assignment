@@ -24,7 +24,7 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 018796eab860d823da8d67fe4189b0973cb0860e`
+        Authorization: `Bearer 50cea1963d043979bffd1a35aeb1d2645c17534e`
       }
     })
       .then(res => {
