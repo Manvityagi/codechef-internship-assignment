@@ -14,7 +14,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 6db79cf384e937dabb7ad25ac915c59d92013fbd`
+        Authorization: `Bearer a45a45ffc4354b22d1098f1c56a0f852b79289d2`
       }
     })
       .then(res => {
@@ -52,7 +52,7 @@ class Contest extends React.Component {
               <tr key={problem.problemCode}>
                 <td value={problem.problemCode} onClick={this.problemEventHandler}>{problem.problemCode}</td>
                 <td>{problem.successfulSubmissions}</td>  
-                <td>{problem.accuracy}</td>
+                <td>{problem.accuracy.toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
@@ -73,5 +73,5 @@ export default Contest;
 //       {problem.problemCode}
 //     </button> */}
 //         {problem.successfulSubmissions}    {problem.accuracy}{" "}
-//   </li> //problem.accuracy.fixed(2)
+//   </li> //problem.accuracy.toFixed(2)
 // ))}
