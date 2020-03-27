@@ -2,7 +2,7 @@ import React from "react";
 
 class Problem extends React.Component {
   render() {
-    return <h2>NOT FOUND!!!</h2>;
+    return <h2>Problem PAGE</h2>;
   }
 }
 

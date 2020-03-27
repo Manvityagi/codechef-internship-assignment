@@ -14,7 +14,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer baab61a4dd2e023347442f559e2542a8579e4b7c`
+        Authorization: `Bearer 8270428b23ae47326e1f1bb86d68cf09006743bf`
       }
     })
       .then(res => {
@@ -29,7 +29,9 @@ class Contest extends React.Component {
   }
 
   problemEventHandler = event => {
-    console.log(event.currentTarget);
+    let problemCode = event.target.getAttribute('value');
+    console.log(event.target.getAttribute('value'));
+    this.props.history.push(`contests/${this.contestCode}/problems/${problemCode}`);
   };
 
   render() {
@@ -48,8 +50,8 @@ class Contest extends React.Component {
           <tbody>
             {this.state.problemList.map(problem => (
               <tr key={problem.problemCode}>
-                <td onClick={this.problemEventHandler}>{problem.problemCode}</td>
-                <td>{problem.successfulSubmissions}</td>
+                <td value={problem.problemCode} onClick={this.problemEventHandler}>{problem.problemCode}</td>
+                <td>{problem.successfulSubmissions}</td>  
                 <td>{problem.accuracy}</td>
               </tr>
             ))}
@@ -61,6 +63,8 @@ class Contest extends React.Component {
 }
 
 export default Contest;
+
+// onClick={this.props.history.push(`contests/${this.contestCode}/problems/${problem.problemCode}`)}
 
 // {this.state.problemList.map(problem => (
 //   <li key={problem.problemCode}>
