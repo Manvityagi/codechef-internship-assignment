@@ -40,7 +40,8 @@ class Contest extends React.Component {
 
   render() {
     // why is this not working as expected
-    if(this.state.problemList.length === 0) console.log("NO problems in this contest")
+    if (this.state.problemList.length === 0)
+      console.log("NO problems in this contest");
     return (
       <>
         <header>
