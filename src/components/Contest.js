@@ -14,12 +14,12 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer a45a45ffc4354b22d1098f1c56a0f852b79289d2`
+        Authorization: `Bearer af3a54b3c1d0db7f95943cd6767519ca4ccebc91`
       }
     })
       .then(res => {
         res = res.data.result.data.content.problemsList;
-        console.log(res);
+        // console.log(res);
         this.setState({ problemList: res });
       })
       .catch(err => {
@@ -35,6 +35,8 @@ class Contest extends React.Component {
   };
 
   render() {
+    // why is this not working as expected
+    if(this.state.problemList.length === 0) console.log("NO problems in this contest")
     return (
       <>
         <h2>Contest Page - {this.contestCode}</h2>
