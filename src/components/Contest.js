@@ -31,7 +31,7 @@ class Contest extends React.Component {
   problemEventHandler = event => {
     let problemCode = event.target.getAttribute('value');
     console.log(event.target.getAttribute('value'));
-    this.props.history.push(`contests/${this.contestCode}/problems/${problemCode}`);
+    this.props.history.push(`/contests/${this.contestCode}/problems/${problemCode}`);
   };
 
   render() {
