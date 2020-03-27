@@ -24,7 +24,7 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer a45a45ffc4354b22d1098f1c56a0f852b79289d2`
+        Authorization: `Bearer af3a54b3c1d0db7f95943cd6767519ca4ccebc91`
       }
     })
       .then(res => {
@@ -54,7 +54,6 @@ class Problem extends React.Component {
   };
 
   render() {
-    console.log(this.state.languages[0]);
     return (
       <>
         <h1>{this.state.pname}</h1>
