@@ -16,7 +16,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer af3a54b3c1d0db7f95943cd6767519ca4ccebc91`
+        Authorization: `Bearer 50cea1963d043979bffd1a35aeb1d2645c17534e`
       }
     })
       .then(res => {
@@ -52,44 +52,6 @@ class Contest extends React.Component {
               alt="CodeChef"
             />
           </div>
-          {/* <div>
-            <form className={classes.login} action="/action_page.php">
-              <input type="text" placeholder="Username" name="username" />
-              <input type="text" placeholder="Password" name="psw" />
-              <button type="submit">Login</button>
-            </form>
-          </div>
-          <div className={classes.container}>
-            <span className={classes.psw}>
-              <a className={classes.forget} href="#">
-                Forgot Password
-              </a>
-            </span>
-          </div>
-
-          <div className={classes.images}>
-            <img
-              className={classes.icons}
-              src={require("./assets/google.webp")}
-              alt="google plus"
-            />
-            <img
-              className={classes.icons}
-              src={require("./assets/github.png")}
-              alt="github"
-            />
-            <img
-              className={classes.icons}
-              src={require("./assets/facebook.png")}
-              alt="facebook"
-            />
-          </div> */}
-
-          {/* <div className={classes.signup}>
-            <button className={classes.newinput} type="link">
-              New User
-            </button>
-          </div> */}
         </header>
 
         <div className={classes.content}>
@@ -143,15 +105,3 @@ class Contest extends React.Component {
 }
 
 export default Contest;
-
-// onClick={this.props.history.push(`contests/${this.contestCode}/problems/${problem.problemCode}`)}
-
-// {this.state.problemList.map(problem => (
-//   <li key={problem.problemCode}>
-//     {problem.problemCode}
-//     {/* <button onClick={this.props.history.push(`contests/${this.contestCode}/problems/${problem.problemCode}`)}>
-//       {problem.problemCode}
-//     </button> */}
-//         {problem.successfulSubmissions}    {problem.accuracy}{" "}
-//   </li> //problem.accuracy.toFixed(2)
-// ))}

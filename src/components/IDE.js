@@ -20,16 +20,15 @@ class IDE extends React.Component {
   handleRun = () => {
     if (this.state.sourceCode.length === 0) {
       console.log("Language Not Selected");
+      return;
     }
-
-    // setTimeout(() => { axios() },1000)
-
+  
     axios({
       method: "post",
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 9db90b86958ec1d36946adad73228a31ec636094`
+        Authorization: `Bearer 50cea1963d043979bffd1a35aeb1d2645c17534e`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -41,22 +40,25 @@ class IDE extends React.Component {
         console.log(res);
         let link = res.data.result.data.link;
         console.log(link);
-        axios({
-          method: "get",
-          url: `https://api.codechef.com/ide/status?link=${link}`,
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer 9db90b86958ec1d36946adad73228a31ec636094`
-          }
-        })
-          .then(res => {
-            console.log(res);
+  
+        setTimeout(() => {
+          axios({
+            method: "get",
+            url: `https://api.codechef.com/ide/status?link=${link}`,
+            headers: {
+              Accept: "application/json",
+              Authorization: `Bearer 50cea1963d043979bffd1a35aeb1d2645c17534e`
+            }
           })
-          .catch(err => {
-            console.log("Couldnt Run to find status");
-            console.log(err.response);
-          });
-      },1000)
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log("Couldnt Run to find status");
+              console.log(err.response);
+            });
+        }, 1000);
+      })
       .catch(err => {
         console.log("Couldnt Run 1");
         console.log(err);
