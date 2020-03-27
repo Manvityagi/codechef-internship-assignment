@@ -29,13 +29,9 @@ class Contest extends React.Component {
   }
 
   problemEventHandler = event => {
-<<<<<<< HEAD
-    console.log(event.target.getAttribute('problemID'));
-=======
     let problemCode = event.target.getAttribute('value');
     console.log(event.target.getAttribute('value'));
     this.props.history.push(`contests/${this.contestCode}/problems/${problemCode}`);
->>>>>>> 53945600188f655d1776315e57c658bdb7feb423
   };
 
   render() {
@@ -53,15 +49,9 @@ class Contest extends React.Component {
           </thead>
           <tbody>
             {this.state.problemList.map(problem => (
-<<<<<<< HEAD
-              <tr key={problem.problemCode} >
-                <td data-title="problemID"onClick={this.problemEventHandler}>{problem.problemCode}</td>
-                <td>{problem.successfulSubmissions}</td>
-=======
               <tr key={problem.problemCode}>
                 <td value={problem.problemCode} onClick={this.problemEventHandler}>{problem.problemCode}</td>
                 <td>{problem.successfulSubmissions}</td>  
->>>>>>> 53945600188f655d1776315e57c658bdb7feb423
                 <td>{problem.accuracy}</td>
               </tr>
             ))}
