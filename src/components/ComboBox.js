@@ -4,7 +4,6 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
 
 class ComboBox extends React.Component {
-
   state = {
     contests: []
   };
@@ -15,7 +14,7 @@ class ComboBox extends React.Component {
       url: `https://api.codechef.com/contests/?fields=&sortBy=&sortOrder=`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer baab61a4dd2e023347442f559e2542a8579e4b7c`
+        Authorization: `Bearer 8270428b23ae47326e1f1bb86d68cf09006743bf`
       }
     })
       .then(res => {
@@ -34,7 +33,7 @@ class ComboBox extends React.Component {
         id="combo-box-demo"
         options={this.state.contests}
         getOptionLabel={option => `${option.code} - ${option.name}`}
-        onChange={ (a,b,c) => this.props.history.push(`/contest/${b.code}`)}
+        onChange={(a, b, c) => this.props.history.push(`/contest/${b.code}`)}
         style={{ width: 300 }}
         renderInput={params => (
           <TextField {...params} label="Combo box" variant="outlined" />
