@@ -40,7 +40,7 @@ class ComboBox extends React.Component {
             />
           </div>
         </header>
-        <img src={require("../assets/wp1828902.png")} />
+        <img src={require("../assets/wp1828902.png")} alt="" />
         <p className={classes.heading}>COMPETE</p>
         <div className={classes.ComboBox}>
           <Autocomplete
