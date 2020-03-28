@@ -30,7 +30,7 @@ class ComboBox extends React.Component {
 
   render() {
     return (
-      <>
+      <div className={classes.ComboBoxPage}>
         <header>
           <div className={classes.header}>
             <img
@@ -56,7 +56,7 @@ class ComboBox extends React.Component {
             )}
           />
         </div>
-      </>
+      </div>
     );
   }
 }
