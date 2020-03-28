@@ -63,9 +63,7 @@ class Contest extends React.Component {
 
         <div className={classes.content}>
           <aside className={classes.breadcrumbs}>
-            <a href="#">Home</a>
-            &nbsp;»&nbsp;
-            <a href="#">Compete</a>
+            <a href="http://localhost:3000/search">Home </a>
             &nbsp;»&nbsp;
             <h2>Contest Page - {this.contestCode}</h2>
           </aside>
