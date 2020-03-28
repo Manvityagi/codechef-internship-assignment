@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
+// import { render } from "react-dom";
 import axios from "axios";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
@@ -47,7 +47,7 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer 50cea1963d043979bffd1a35aeb1d2645c17534e`
+              Authorization: `Bearer daf1c927dd815c187e01dfc53276931885c9babf`
             }
           })
             .then(res => {
@@ -86,7 +86,7 @@ class IDE extends React.Component {
     let isOutput = this.state.output.length == 0;
     return (
       <>
-        <label htmlfor="language">Language</label>
+        <label htmlFor="language">Language</label>
         <select
           id="language"
           onChange={this.changeLanguage}
@@ -113,6 +113,7 @@ class IDE extends React.Component {
         <h3>Custom input</h3>
         <textarea rows="4" cols="50" onChange={this.changeInput}></textarea>
         <h3>Output</h3>
+<<<<<<< HEAD:src/components/IDE.js
         
         {isOutput ? (
           <textarea rows="4" cols="50">
@@ -123,6 +124,9 @@ class IDE extends React.Component {
             {this.state.output}
           </textarea>
         )}
+=======
+        <textarea rows="4" cols="50" >{this.state.output}</textarea>
+>>>>>>> 8d12b17e44063ed56bcd25931e64da38c57df5ab:src/components/IDE/IDE.js
       </>
     );
   }
