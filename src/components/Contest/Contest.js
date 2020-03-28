@@ -62,11 +62,11 @@ class Contest extends React.Component {
         </header>
 
         <div className={classes.content}>
-          <aside className={classes.breadcrumbs}>
-            <a href="http://localhost:3000/search">Home </a>
-            &nbsp;»&nbsp;
-            <h2>Contest Page - {this.contestCode}</h2>
-          </aside>
+          {/* <aside className={classes.breadcrumbs}> */}
+          <a href="http://localhost:3000/search">Home </a>
+          &nbsp;»&nbsp;
+          <h2>Contest Page - {this.contestCode}</h2>
+          {/* </aside> */}
           <div>
             <b>Scorable Problems for Division 2</b>
           </div>
@@ -95,16 +95,17 @@ class Contest extends React.Component {
                 ))}
               </tbody>
             </table>
+
+            <div className={classes.rightHandPage}>
+              <div className={classes.contest}>Insert code for future</div>
+              <div className={classes.parent}>
+                <div className={classes.contest1}>
+                  <h3>CONTEST RANKS</h3>
+                  <button type="link">Go to Contest Ranks</button>
+                </div>
+              </div>
+            </div>
           </main>
-        </div>
-        <div className={classes.contest}>
-          Insert code for future contest here
-        </div>
-        <div className={classes.parent}>
-          <div className={classes.contest1}>
-            <h3>CONTEST RANKS</h3>
-            <button type="link">Go to Contest Ranks</button>
-          </div>
         </div>
       </>
     );
