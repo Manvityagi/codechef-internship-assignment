@@ -1,0 +1,33 @@
+.header {
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+  height: 90px;
+  width: 100%;
+}
+
+.himage {
+  height: 300px;
+  width: 300px;
+  margin-left: 350px;
+  position: relative;
+  bottom: 80px;
+}
+
+.heading {
+  font-size: xx-large;
+  font-family: monospace;
+  margin-left: 47%;
+}
+
+.ComboBox {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  margin-left: 20%;
+  height: 400px;
+  width: 60%;
+  border-radius: 8%;
+}

@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 import classes from "./Contest.module.css";
-import { Breadcrumbs } from "@material-ui/core";
-// import pictures from './assets';
 class Contest extends React.Component {
   state = {
     problemList: [],
@@ -44,6 +42,7 @@ class Contest extends React.Component {
   };
 
   render() {
+    console.log(this.state.problemList.length);
     // why is this not working as expected
     if (this.state.problemList.length === 0)
       console.log("NO problems in this contest");
@@ -82,7 +81,8 @@ class Contest extends React.Component {
               <tbody>
                 {this.state.problemList.map(problem => (
                   <tr key={problem.problemCode}>
-                    <td className={classes.problemID}
+                    <td
+                      className={classes.problemID}
                       value={problem.problemCode}
                       onClick={this.problemEventHandler}
                     >
