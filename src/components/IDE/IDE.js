@@ -18,17 +18,17 @@ class IDE extends React.Component {
   };
 
   handleRun = () => {
-    if (this.state.sourceCode.length === 0) {
-      console.log("Language Not Selected");
-      return;
-    }
+    // if (this.state.sourceCode.length === 0) {
+    //   console.log("Language Not Selected");
+    //   return;
+    // }
 
     axios({
       method: "post",
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 50cea1963d043979bffd1a35aeb1d2645c17534e`
+        Authorization: `Bearer 029df49ef6e3f314b2c947816887f151c99e9391`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -47,17 +47,20 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer daf1c927dd815c187e01dfc53276931885c9babf`
+              Authorization: `Bearer 029df49ef6e3f314b2c947816887f151c99e9391`
             }
           })
             .then(res => {
+              let output = res.data.result.data.output;
+              this.setState({output:output});
+              console.log(output);
               console.log(res);
             })
             .catch(err => {
               console.log("Couldnt Run to find status");
-              console.log(err.response);
+              console.log(err);
             });
-        }, 1000);
+        }, 3000);
       })
       .catch(err => {
         console.log("Couldnt Run 1");
@@ -83,7 +86,9 @@ class IDE extends React.Component {
     // console.log(this.state.language);
     // console.log(this.state.sourceCode);
     // console.log(this.state.input);
-    let isOutput = this.state.output.length == 0;
+    // console.log(this.state.output.length)
+    let isOutput = this.state.output.length === 0;
+    // console.log(isOutput)
     return (
       <>
         <label htmlFor="language">Language</label>
@@ -112,21 +117,18 @@ class IDE extends React.Component {
 
         <h3>Custom input</h3>
         <textarea rows="4" cols="50" onChange={this.changeInput}></textarea>
-        <h3>Output</h3>
-<<<<<<< HEAD:src/components/IDE.js
-        
-        {isOutput ? (
+
+        {!isOutput ? (
+          <>
+         <h3>Output</h3>
           <textarea rows="4" cols="50">
             {this.state.output}
           </textarea>
+          </>
         ) : (
-          <textarea rows="0" cols="0">
-            {this.state.output}
-          </textarea>
+         <br></br>
         )}
-=======
-        <textarea rows="4" cols="50" >{this.state.output}</textarea>
->>>>>>> 8d12b17e44063ed56bcd25931e64da38c57df5ab:src/components/IDE/IDE.js
+
       </>
     );
   }

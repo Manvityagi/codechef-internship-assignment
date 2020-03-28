@@ -5,7 +5,8 @@ import { Breadcrumbs } from "@material-ui/core";
 // import pictures from './assets';
 class Contest extends React.Component {
   state = {
-    problemList: []
+    problemList: [],
+    endDate: ""
   };
 
   contestCode = this.props.match.params.contest_code;
@@ -16,13 +17,17 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer daf1c927dd815c187e01dfc53276931885c9babf`
+        Authorization: `Bearer 029df49ef6e3f314b2c947816887f151c99e9391`
       }
     })
       .then(res => {
-        res = res.data.result.data.content.problemsList;
         // console.log(res);
-        this.setState({ problemList: res });
+        res = res.data.result.data.content
+        let problemList = res.problemsList;
+        let endDate = res.endDate;
+        let currentTime = res.currentTime;
+        console.log(endDate);
+        this.setState({ problemList });
       })
       .catch(err => {
         console.log("NOT DONE");

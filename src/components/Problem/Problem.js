@@ -24,13 +24,13 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer daf1c927dd815c187e01dfc53276931885c9babf`
+        Authorization: `Bearer 029df49ef6e3f314b2c947816887f151c99e9391`
       }
     })
       .then(res => {
-        res = res.data.result.data.content.text();
+        res = res.data.result.data.content;
 
-        console.log(res);
+        // console.log(res);
         this.setState({
           pname: res["problemName"],
           pcode: res["problemCode"],
@@ -59,11 +59,11 @@ class Problem extends React.Component {
       <>
         <h1>{this.state.pname}</h1>
         <div
-        // dangerouslySetInnerHTML={{
-        //   __html: this.state.pstatement
-        // }}
+          dangerouslySetInnerHTML={{
+            __html: this.state.pstatement
+          }}
         >
-          {this.state.pstatement}
+          {/* {this.state.pstatement} */}
         </div>
         <h1>successful Submissions - {this.state.successfulSubmissions}</h1>
 
