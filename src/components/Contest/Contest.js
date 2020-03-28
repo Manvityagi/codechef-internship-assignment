@@ -15,7 +15,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 54d05073f0248523b2064cf4711f86bb695a0345`
+        Authorization: `Bearer 076c84fadc7f4aba17c39c996b3b4808c88df9fa`
       }
     })
       .then(res => {
@@ -24,7 +24,7 @@ class Contest extends React.Component {
         res = res.data.result.data.content;
         let problemList = res.problemsList;
         let endDate = res.endDate;
-        let currentTime = res.currentTime;
+        // let currentTime = res.currentTime;
         console.log(endDate);
         this.setState({ problemList });
       })

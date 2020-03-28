@@ -1,0 +1,27 @@
+.IDE {
+  margin-left: 20%;
+}
+
+.compilebuttons {
+  margin-top: 2%;
+}
+/* button{
+     
+} */
+.editor {
+  overflow: auto;
+  resize: both;
+  height: 400px;
+  width: 1145px;
+}
+.run {
+  border-radius: 2%;
+  border-color: teal;
+  width: 100px;
+}
+.submit {
+  margin-left: 5px;
+  border-radius: 2%;
+  border-color: teal;
+  width: 100px;
+}

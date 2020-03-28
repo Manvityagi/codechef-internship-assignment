@@ -4,7 +4,9 @@ import axios from "axios";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
-
+import "ace-builds/src-noconflict/theme-monokai";
+import ReactResizeDetector from "react-resize-detector";
+import classes from "./IDE.module.css";
 class IDE extends React.Component {
   state = {
     sourceCode: "",
@@ -14,7 +16,16 @@ class IDE extends React.Component {
     status: "",
     memory: "",
     date: "",
-    time: ""
+    time: "",
+    editorHeight: 400,
+    editorWidth: "auto"
+  };
+
+  onResize = (w, h) => {
+    this.setState({
+      editorHeight: h,
+      editorWidth: w
+    });
   };
 
   handleRun = () => {
@@ -28,7 +39,7 @@ class IDE extends React.Component {
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 54d05073f0248523b2064cf4711f86bb695a0345`
+        Authorization: `Bearer 076c84fadc7f4aba17c39c996b3b4808c88df9fa`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -47,12 +58,12 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer 54d05073f0248523b2064cf4711f86bb695a0345`
+              Authorization: `Bearer 076c84fadc7f4aba17c39c996b3b4808c88df9fa`
             }
           })
             .then(res => {
               let output = res.data.result.data.output;
-              this.setState({output:output});
+              this.setState({ output: output });
               console.log(output);
               console.log(res);
             })
@@ -90,7 +101,7 @@ class IDE extends React.Component {
     let isOutput = this.state.output.length === 0;
     // console.log(isOutput)
     return (
-      <>
+      <div className={classes.IDE}>
         <label htmlFor="language">Language</label>
         <select
           id="language"
@@ -103,33 +114,46 @@ class IDE extends React.Component {
             </option>
           ))}
         </select>
-
-        <AceEditor
-          mode="javascript"
-          theme="github"
-          value={this.state.sourceCode}
-          onChange={this.changeSourceCode}
-          name="UNIQUE_ID_OF_DIV"
-          editorProps={{ $blockScrolling: true }}
-        />
-        <button onClick={this.handleRun}>Run</button>
-        <button onClick={this.handleSubmit}>Submit</button>
+        <div className={classes.editor}>
+          <ReactResizeDetector
+            handleWidth
+            handleHeight
+            onResize={this.onResize}
+          />
+          <AceEditor
+            mode="javascript"
+            theme="monokai"
+            value={this.state.sourceCode}
+            onChange={this.changeSourceCode}
+            name="UNIQUE_ID_OF_DIV"
+            editorProps={{ $blockScrolling: true }}
+            height={this.state.editorHeight}
+            width={this.state.editorWidth}
+          />
+        </div>
+        <div className={classes.compilebuttons}>
+          <button className={classes.run} onClick={this.handleRun}>
+            Run
+          </button>
+          <button className={classes.submit} onClick={this.handleSubmit}>
+            Submit
+          </button>
+        </div>
 
         <h3>Custom input</h3>
-        <textarea rows="4" cols="50" onChange={this.changeInput}></textarea>
+        <textarea rows="6" cols="141" onChange={this.changeInput}></textarea>
 
         {!isOutput ? (
           <>
-         <h3>Output</h3>
-          <textarea rows="4" cols="50">
-            {this.state.output}
-          </textarea>
+            <h3>Output</h3>
+            <textarea rows="6" cols="141">
+              {this.state.output}
+            </textarea>
           </>
         ) : (
-         <br></br>
+          <br></br>
         )}
-
-      </>
+      </div>
     );
   }
 }
