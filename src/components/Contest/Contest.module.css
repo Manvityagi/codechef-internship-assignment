@@ -128,6 +128,8 @@ td {
 
 .problemID{
   cursor: pointer;
+  color: #005a9e;
+  text-decoration: underline;
 }
 
 .contest {

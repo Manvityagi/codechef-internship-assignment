@@ -15,12 +15,13 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 029df49ef6e3f314b2c947816887f151c99e9391`
+        Authorization: `Bearer 54d05073f0248523b2064cf4711f86bb695a0345`
       }
     })
       .then(res => {
         // console.log(res);
-        res = res.data.result.data.content
+
+        res = res.data.result.data.content;
         let problemList = res.problemsList;
         let endDate = res.endDate;
         let currentTime = res.currentTime;
@@ -44,9 +45,10 @@ class Contest extends React.Component {
   render() {
     console.log(this.state.problemList.length);
     // why is this not working as expected
-    if (this.state.problemList.length === 0)
-      console.log("NO problems in this contest");
-      
+    // if (this.state.problemList.length === 0) {
+    //   return <><h1>This contest has not started yet</h1></>;
+    // }
+
     return (
       <>
         <header>
@@ -62,8 +64,9 @@ class Contest extends React.Component {
         <div className={classes.content}>
           <aside className={classes.breadcrumbs}>
             <a href="#">Home</a>
-
+            &nbsp;»&nbsp;
             <a href="#">Compete</a>
+            &nbsp;»&nbsp;
             <h2>Contest Page - {this.contestCode}</h2>
           </aside>
           <div>

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import IDE from "../IDE/IDE";
+import classes from "./Problem.module.css";
 
 class Problem extends React.Component {
   state = {
@@ -24,7 +25,7 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 029df49ef6e3f314b2c947816887f151c99e9391`
+        Authorization: `Bearer 54d05073f0248523b2064cf4711f86bb695a0345`
       }
     })
       .then(res => {
@@ -56,19 +57,22 @@ class Problem extends React.Component {
   render() {
     // console.log(this.state.pstatement);
     return (
-      <>
-        <h1>{this.state.pname}</h1>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: this.state.pstatement
-          }}
-        >
-          {/* {this.state.pstatement} */}
+      <div className={classes.Problem}>
+        <div className={classes.problem}>
+          <h2>{this.state.pname} </h2>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: this.state.pstatement
+            }}
+          >
+            {/* {this.state.pstatement} */}
+          </div>
         </div>
+
         <h1>successful Submissions - {this.state.successfulSubmissions}</h1>
 
         <IDE languages={this.state.languages}></IDE>
-      </>
+      </div>
     );
   }
 }
