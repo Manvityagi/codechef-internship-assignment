@@ -11,10 +11,10 @@ class IDE extends React.Component {
     language: "",
     input: "",
     output: "",
-    status:"",
-    memory:"",
-    date:"",
-    time:""
+    status: "",
+    memory: "",
+    date: "",
+    time: ""
   };
 
   handleRun = () => {
@@ -22,7 +22,7 @@ class IDE extends React.Component {
       console.log("Language Not Selected");
       return;
     }
-  
+
     axios({
       method: "post",
       url: "https://api.codechef.com/ide/run",
@@ -37,10 +37,10 @@ class IDE extends React.Component {
       }
     })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         let link = res.data.result.data.link;
-        console.log(link);
-  
+        // console.log(link);
+
         setTimeout(() => {
           axios({
             method: "get",
@@ -83,6 +83,7 @@ class IDE extends React.Component {
     // console.log(this.state.language);
     // console.log(this.state.sourceCode);
     // console.log(this.state.input);
+    let isOutput = this.state.output.length == 0;
     return (
       <>
         <label htmlfor="language">Language</label>
@@ -112,7 +113,16 @@ class IDE extends React.Component {
         <h3>Custom input</h3>
         <textarea rows="4" cols="50" onChange={this.changeInput}></textarea>
         <h3>Output</h3>
-        <textarea rows="4" cols="50">{this.state.output}</textarea>
+        
+        {isOutput ? (
+          <textarea rows="4" cols="50">
+            {this.state.output}
+          </textarea>
+        ) : (
+          <textarea rows="0" cols="0">
+            {this.state.output}
+          </textarea>
+        )}
       </>
     );
   }

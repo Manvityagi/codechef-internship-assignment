@@ -54,6 +54,7 @@ class Problem extends React.Component {
   };
 
   render() {
+    // console.log(this.state.pstatement);
     return (
       <>
         <h1>{this.state.pname}</h1>
