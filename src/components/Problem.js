@@ -28,9 +28,9 @@ class Problem extends React.Component {
       }
     })
       .then(res => {
-        res = res.data.result.data.content;
+        res = res.data.result.data.content.text();
 
-        //   console.log(res);
+        console.log(res);
         this.setState({
           pname: res["problemName"],
           pcode: res["problemCode"],
@@ -58,10 +58,12 @@ class Problem extends React.Component {
       <>
         <h1>{this.state.pname}</h1>
         <div
-          dangerouslySetInnerHTML={{
-            __html: this.state.pstatement
-          }}
-        ></div>
+        // dangerouslySetInnerHTML={{
+        //   __html: this.state.pstatement
+        // }}
+        >
+          {this.state.pstatement}
+        </div>
         <h1>successful Submissions - {this.state.successfulSubmissions}</h1>
 
         <IDE languages={this.state.languages}></IDE>

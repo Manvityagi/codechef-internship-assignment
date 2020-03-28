@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
+// import { render } from "react-dom";
 import axios from "axios";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
@@ -85,7 +85,7 @@ class IDE extends React.Component {
     // console.log(this.state.input);
     return (
       <>
-        <label htmlfor="language">Language</label>
+        <label htmlFor="language">Language</label>
         <select
           id="language"
           onChange={this.changeLanguage}
@@ -112,7 +112,7 @@ class IDE extends React.Component {
         <h3>Custom input</h3>
         <textarea rows="4" cols="50" onChange={this.changeInput}></textarea>
         <h3>Output</h3>
-        <textarea rows="4" cols="50">{this.state.output}</textarea>
+        <textarea rows="4" cols="50" >{this.state.output}</textarea>
       </>
     );
   }
