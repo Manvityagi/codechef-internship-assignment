@@ -24,7 +24,7 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer daf1c927dd815c187e01dfc53276931885c9babf`
+        Authorization: `Bearer aaf2d71c9c02a063eaf48877ff1f0accead260c8`
       }
     })
       .then(res => {
@@ -62,7 +62,7 @@ class Problem extends React.Component {
         //   __html: this.state.pstatement
         // }}
         >
-          {this.state.pstatement}
+          {/* {this.state.pstatement} */}
         </div>
         <h1>successful Submissions - {this.state.successfulSubmissions}</h1>
 

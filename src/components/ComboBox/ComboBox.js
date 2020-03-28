@@ -15,7 +15,7 @@ class ComboBox extends React.Component {
       url: `https://api.codechef.com/contests/?fields=&sortBy=&sortOrder=`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer daf1c927dd815c187e01dfc53276931885c9babf`
+        Authorization: `Bearer aaf2d71c9c02a063eaf48877ff1f0accead260c8`
       }
     })
       .then(res => {
@@ -30,18 +30,33 @@ class ComboBox extends React.Component {
 
   render() {
     return (
-      <Autocomplete
-        id="combo-box-demo"
-        options={this.state.contests}
-        getOptionLabel={option => `${option.code} - ${option.name}`}
-        onChange={(a, b, c) => this.props.history.push(`/contest/${b.code}`)}
-        style={{ width: 300 }}
-        renderInput={params => (
-          <div className={classes.ComboBox}>
-            <TextField {...params} label="Combo box" variant="outlined" />
+      <>
+        <header>
+          <div className={classes.header}>
+            <img
+              className={classes.himage}
+              src={require("../assets/logo.svg")}
+              alt="CodeChef"
+            />
           </div>
-        )}
-      />
+        </header>
+        <img src={require("../assets/wp1828902.png")} />
+        <p className={classes.heading}>COMPETE</p>
+        <div className={classes.ComboBox}>
+          <Autocomplete
+            id="combo-box-demo"
+            options={this.state.contests}
+            getOptionLabel={option => `${option.code} - ${option.name}`}
+            onChange={(a, b, c) =>
+              this.props.history.push(`/contest/${b.code}`)
+            }
+            style={{ width: 300 }}
+            renderInput={params => (
+              <TextField {...params} label="All Contests" variant="outlined" />
+            )}
+          />
+        </div>
+      </>
     );
   }
 }

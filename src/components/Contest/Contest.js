@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 import classes from "./Contest.module.css";
-import { Breadcrumbs } from "@material-ui/core";
-// import pictures from './assets';
 class Contest extends React.Component {
   state = {
     problemList: []
@@ -16,7 +14,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer daf1c927dd815c187e01dfc53276931885c9babf`
+        Authorization: `Bearer aaf2d71c9c02a063eaf48877ff1f0accead260c8`
       }
     })
       .then(res => {
@@ -39,6 +37,7 @@ class Contest extends React.Component {
   };
 
   render() {
+    console.log(this.state.problemList.length);
     // why is this not working as expected
     if (this.state.problemList.length === 0)
       console.log("NO problems in this contest");
@@ -76,7 +75,8 @@ class Contest extends React.Component {
               <tbody>
                 {this.state.problemList.map(problem => (
                   <tr key={problem.problemCode}>
-                    <td className={classes.problemID}
+                    <td
+                      className={classes.problemID}
                       value={problem.problemCode}
                       onClick={this.problemEventHandler}
                     >
