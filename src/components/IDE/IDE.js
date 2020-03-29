@@ -41,7 +41,7 @@ class IDE extends React.Component {
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 0df6febc3729728fbd3df1df175fc61a7787c2ed`
+        Authorization: `Bearer e7506a20d32535ce96fe0f6e87f5051800e72f13`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -60,7 +60,7 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer 0df6febc3729728fbd3df1df175fc61a7787c2ed`
+              Authorization: `Bearer e7506a20d32535ce96fe0f6e87f5051800e72f13`
             }
           })
             .then(res => {
@@ -168,26 +168,15 @@ class IDE extends React.Component {
           <>
             <h3>{status}</h3>
             <p>{msg}</p>
-            {/* <textarea rows="6" cols="141">
+            <textarea rows="6" cols="141">
               {msg}
-            </textarea> */}
+            </textarea>
           </>
         ) : (
           <br></br>
         )}
 
         
-
-        {/* {!isOutput ? (
-          <>
-            <h3>Output</h3>
-            <textarea rows="6" cols="141">
-              {this.state.output}
-            </textarea>
-          </>
-        ) : (
-          <br></br>
-        )} */}
       </div>
     );
   }
