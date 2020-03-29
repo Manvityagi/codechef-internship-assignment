@@ -17,7 +17,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer c46ba510fa584fc8f97366debe62cc7a8994214f`
+        Authorization: `Bearer 0679c26e82d1d643afd0b353c959289d0d77ba94`
       }
     })
       .then(res => {
@@ -64,11 +64,11 @@ class Contest extends React.Component {
         </header>
 
         <div className={classes.content}>
-          <aside className={classes.breadcrumbs}>
-            <a href="http://localhost:3000/search">Home </a>
-            &nbsp;»&nbsp;
-            <h2>Contest Page - {this.contestCode}</h2>
-          </aside>
+          {/* <aside className={classes.breadcrumbs}> */}
+          <a href="http://localhost:3000/search">Home </a>
+          &nbsp;»&nbsp;
+          <h2>Contest Page - {this.contestCode}</h2>
+          {/* </aside> */}
           <div>
             <b>Scorable Problems for Division 2</b>
           </div>
@@ -97,6 +97,16 @@ class Contest extends React.Component {
                 ))}
               </tbody>
             </table>
+
+            <div className={classes.rightHandPage}>
+              <div className={classes.contest}>Insert code for future</div>
+              <div className={classes.parent}>
+                <div className={classes.contest1}>
+                  <h3>CONTEST RANKS</h3>
+                  <button type="link">Go to Contest Ranks</button>
+                </div>
+              </div>
+            </div>
           </main>
         </div>
         <Timer
@@ -106,12 +116,7 @@ class Contest extends React.Component {
         <div className={classes.contest}>
           Contest ends at {this.state.endDate}
         </div>
-        <div className={classes.parent}>
-          <div className={classes.contest1}>
-            <h3>CONTEST RANKS</h3>
-            <button type="link">Go to Contest Ranks</button>
-          </div>
-        </div>
+     
       </>
     );
   }

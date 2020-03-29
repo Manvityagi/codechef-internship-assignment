@@ -17,6 +17,7 @@
     "react-dom": "^16.13.1",
     "react-loader-spinner": "^3.1.5",
     "react-promise-tracker": "^2.1.0",
+    "react-resize-detector": "^4.2.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1"
   },
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "case-sensitive-paths-webpack-plugin": "^2.3.0"
   }
 }

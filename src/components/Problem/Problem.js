@@ -25,7 +25,7 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer c46ba510fa584fc8f97366debe62cc7a8994214f`
+        Authorization: `Bearer 0679c26e82d1d643afd0b353c959289d0d77ba94`
       }
     })
       .then(res => {
@@ -58,20 +58,20 @@ class Problem extends React.Component {
     // console.log(this.state.pstatement);
     return (
       <div className={classes.Problem}>
+        <h1>PROBLEM</h1>
         <div className={classes.problem}>
           <h2>{this.state.pname} </h2>
           <div
             dangerouslySetInnerHTML={{
               __html: this.state.pstatement
             }}
-          >
-            {/* {this.state.pstatement} */}
-          </div>
+          />
+          <hr></hr>
         </div>
 
-        <h1>successful Submissions - {this.state.successfulSubmissions}</h1>
+        <h1>Successful Submissions - {this.state.successfulSubmissions}</h1>
 
-        <IDE languages={this.state.languages}></IDE>
+        <IDE languages={this.state.languages} />
       </div>
     );
   }
