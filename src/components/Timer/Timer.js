@@ -9,12 +9,16 @@ class Timer extends React.Component {
   };
 
   //if(this.props.currentTime < endDateTime) = Contest Ended
-
-  countDownDate = new Date(this.props.endDate).getTime(); //Doubt - this is not converting
-
+   
+  // countDownDate = new Date(this.props.endDate).getTime(); //Doubt - this is not converting
+  
   render() {
     console.log(this.props.endDate, typeof(this.props.endDate));
-    console.log(this.countDownDate);
+    let date=Date.parse(this.props.endDate.toString());
+    console.log(date);
+    // console.log(newDate(this.props.endDate));
+    // console.log(this.props.endDate.getTime());
+    ;
     return (
       <>
         <h3>TIMER</h3>
