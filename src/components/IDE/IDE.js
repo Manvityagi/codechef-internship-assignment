@@ -17,6 +17,8 @@ class IDE extends React.Component {
     memory: "",
     date: "",
     time: "",
+    stderr: "",
+    cmpinfo: "",
     editorHeight: 400,
     editorWidth: "auto"
   };
@@ -63,9 +65,9 @@ class IDE extends React.Component {
           })
             .then(res => {
               let output = res.data.result.data.output;
-              this.setState({ output: output });
-              console.log(output);
-              console.log(res);
+              let cmpinfo = res.data.result.data.cmpinfo;
+              let stderr = res.data.result.data.stderr;
+              this.setState({output,cmpinfo,stderr });
             })
             .catch(err => {
               console.log("Couldnt Run to find status");
@@ -94,12 +96,28 @@ class IDE extends React.Component {
   };
 
   render() {
-    // console.log(this.state.language);
-    // console.log(this.state.sourceCode);
-    // console.log(this.state.input);
-    // console.log(this.state.output.length)
+    console.log("output",this.state.output);
+    console.log("cmpinfo",this.state.cmpinfo);
+    console.log("stderr",this.state.stderr);
+
+    let msg, status;
+    let isCompileInfo = this.state.cmpinfo.length === 0;
     let isOutput = this.state.output.length === 0;
-    // console.log(isOutput)
+    let isStderr = this.state.stderr.length === 0;
+
+    if (!isCompileInfo) {
+      status = "Compilation Error";
+      msg = this.state.cmpinfo;
+    } else if (!isOutput) {
+      status = "Successfully Executed";
+      msg = this.state.output;
+    } else if (!isStderr) {
+      status = "RunTime Error";
+      msg = this.state.stderr;
+    }
+
+    let isOutputComponent = !isCompileInfo || !isOutput || !isStderr;
+
     return (
       <div className={classes.IDE}>
         <label htmlFor="language">Language</label>
@@ -140,10 +158,27 @@ class IDE extends React.Component {
           </button>
         </div>
 
+        {/* Make a new component for this part later */}
+
         <h3>Custom input</h3>
         <textarea rows="6" cols="141" onChange={this.changeInput}></textarea>
 
-        {!isOutput ? (
+
+        {isOutputComponent ? (
+          <>
+            <h3>{status}</h3>
+            <p>{msg}</p>
+            {/* <textarea rows="6" cols="141">
+              {msg}
+            </textarea> */}
+          </>
+        ) : (
+          <br></br>
+        )}
+
+        
+
+        {/* {!isOutput ? (
           <>
             <h3>Output</h3>
             <textarea rows="6" cols="141">
@@ -152,7 +187,7 @@ class IDE extends React.Component {
           </>
         ) : (
           <br></br>
-        )}
+        )} */}
       </div>
     );
   }
