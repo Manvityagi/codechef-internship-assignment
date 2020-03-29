@@ -44,6 +44,10 @@ class Contest extends React.Component {
     );
   };
 
+  contestRank = e => {
+    this.props.history.push(`/rankings/${this.contestCode}`);
+  };
+
   render() {
     // console.log(this.state.problemList.length);
     // why is this not working as expected
@@ -103,7 +107,9 @@ class Contest extends React.Component {
               <div className={classes.parent}>
                 <div className={classes.contest1}>
                   <h3>CONTEST RANKS</h3>
-                  <button type="link">Go to Contest Ranks</button>
+                  <button onClick={this.contestRank} type="link">
+                    Go to Contest Ranks
+                  </button>
                 </div>
               </div>
             </div>
@@ -116,7 +122,6 @@ class Contest extends React.Component {
         <div className={classes.contest}>
           Contest ends at {this.state.endDate}
         </div>
-     
       </>
     );
   }
