@@ -1,10 +1,12 @@
 import React from "react";
 import axios from "axios";
 import classes from "./Contest.module.css";
+import Timer from "../Timer/Timer";
 class Contest extends React.Component {
   state = {
     problemList: [],
-    endDate: ""
+    endDate: "",
+    currentTime: ""
   };
 
   contestCode = this.props.match.params.contest_code;
@@ -15,7 +17,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 54d05073f0248523b2064cf4711f86bb695a0345`
+        Authorization: `Bearer c46ba510fa584fc8f97366debe62cc7a8994214f`
       }
     })
       .then(res => {
@@ -25,8 +27,8 @@ class Contest extends React.Component {
         let problemList = res.problemsList;
         let endDate = res.endDate;
         let currentTime = res.currentTime;
-        console.log(endDate);
-        this.setState({ problemList });
+        // console.log(endDate);
+        this.setState({ problemList, endDate, currentTime });
       })
       .catch(err => {
         console.log("NOT DONE");
@@ -36,14 +38,14 @@ class Contest extends React.Component {
 
   problemEventHandler = event => {
     let problemCode = event.target.getAttribute("value");
-    console.log(event.target.getAttribute("value"));
+    // console.log(event.target.getAttribute("value"));
     this.props.history.push(
       `/contests/${this.contestCode}/problems/${problemCode}`
     );
   };
 
   render() {
-    console.log(this.state.problemList.length);
+    // console.log(this.state.problemList.length);
     // why is this not working as expected
     // if (this.state.problemList.length === 0) {
     //   return <><h1>This contest has not started yet</h1></>;
@@ -97,8 +99,12 @@ class Contest extends React.Component {
             </table>
           </main>
         </div>
+        <Timer
+          currentTime={this.state.currentTime}
+          endDate={this.state.endDate}
+        ></Timer>
         <div className={classes.contest}>
-          Insert code for future contest here
+          Contest ends at {this.state.endDate}
         </div>
         <div className={classes.parent}>
           <div className={classes.contest1}>
