@@ -7,7 +7,9 @@ class Contest extends React.Component {
   state = {
     problemList: [],
     endDate: "",
-    startDate: ""
+    startDate: "",
+    show: false,
+    content: []
   };
 
   contestCode = this.props.match.params.contest_code;
@@ -35,6 +37,27 @@ class Contest extends React.Component {
         console.log("NOT DONE");
         console.log(err.response);
       });
+
+
+      axios({
+        method: "get",
+        url: `https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode${this.contestCode}=&fields=`,
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
+        }
+      })
+        .then(res => {
+          console.log(res);
+  
+          let content = res.data.result.data.content;
+  
+          this.setState({ content });
+        })
+        .catch(err => {
+          console.log("NOT DONE");
+          console.log(err.response);
+        });
   }
 
   problemEventHandler = event => {
@@ -128,8 +151,17 @@ class Contest extends React.Component {
           )}
         </div>
 
-              <Submissions contestCode = {this.contestCode}></Submissions>
-
+            <button onClick={() => this.setState(prevState => ({
+              ...prevState,
+              show: !prevState.show
+            }))}>+</button>
+        {this.state.show ? (
+          <>
+            <Submissions content={this.state.content}></Submissions>
+          </>
+        ) : (
+          <br></br>
+        )}
       </div>
     );
   }
