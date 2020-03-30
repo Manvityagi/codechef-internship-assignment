@@ -17,7 +17,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer c83f769e2250d9dedaf19c9d8cbd21d8f251a66d`
+        Authorization: `Bearer 215afac3201241400af559b57876d62faa9f81d5`
       }
     })
       .then(res => {
@@ -57,9 +57,6 @@ class Contest extends React.Component {
 
     let noProblems = this.state.problemList.length === 0;
 
-    if (!noProblems) {
-    }
-
     return (
       <div>
         <header>
@@ -78,63 +75,67 @@ class Contest extends React.Component {
           &nbsp;»&nbsp;
           <h2>Contest Page - {this.contestCode}</h2>
           {/* </aside> */}
-
           {!noProblems ? (
             <div>
-            <div>
-              <b>Scorable Problems for Division 2</b>
-            </div>
-            <main>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Code</th>
-                    <th>Successful Submissions</th>
-                    <th>Accuracy</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.problemList.map(problem => (
-                    <tr key={problem.problemCode}>
-                      <td
-                        className={classes.problemID}
-                        value={problem.problemCode}
-                        onClick={this.problemEventHandler}
-                      >
-                        {problem.problemCode}
-                      </td>
-                      <td>{problem.successfulSubmissions}</td>
-                      <td>{problem.accuracy.toFixed(2)}</td>
+              <div>
+                <b>Scorable Problems</b>
+              </div>
+              <main>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Successful Submissions</th>
+                      <th>Accuracy</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {this.state.problemList.map(problem => (
+                      <tr key={problem.problemCode}>
+                        <td
+                          className={classes.problemID}
+                          value={problem.problemCode}
+                          onClick={this.problemEventHandler}
+                        >
+                          {problem.problemCode}
+                        </td>
+                        <td>{problem.successfulSubmissions}</td>
+                        <td>{problem.accuracy.toFixed(2)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
 
-              <div className={classes.rightHandPage}>
-                <div className={classes.contest}>Insert code for future</div>
-                <div className={classes.parent}>
-                  <div className={classes.contest1}>
-                    <h3>CONTEST RANKS</h3>
-                    <button onClick={this.contestRank} type="link">
-                      Go to Contest Ranks
-                    </button>
+                <div className={classes.rightHandPage}>
+                  <div className={classes.contest}>
+                    <Timer
+                      startDate={this.state.startDate}
+                      endDate={this.state.endDate}
+                    ></Timer>
+                  </div>
+                  <div className={classes.parent}>
+                    <div className={classes.contest1}>
+                      <h3>CONTEST RANKS</h3>
+                      <button onClick={this.contestRank} type="link">
+                        Go to Contest Ranks
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </main>
-        
+              </main>
             </div>
           ) : (
-            <p style = {{textAlign:'center', fontSize:'20px'}}>This contest has no problems</p>
+            <>
+              <Timer
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+              ></Timer>
+              <p style={{ textAlign: "center", fontSize: "20px" }}>
+                This contest has no problems
+              </p>
+            </>
           )}
-          </div>
-      
-
-            
-        <Timer
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-        ></Timer>
+        </div>
       </div>
     );
   }
