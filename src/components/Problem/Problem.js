@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import IDE from "../IDE/IDE";
 import classes from "./Problem.module.css";
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+
 
 class Problem extends React.Component {
   state = {
@@ -25,7 +27,7 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer c83f769e2250d9dedaf19c9d8cbd21d8f251a66d`
+        Authorization: `Bearer 215afac3201241400af559b57876d62faa9f81d5`
       }
     })
       .then(res => {
@@ -50,9 +52,6 @@ class Problem extends React.Component {
       });
   }
 
-  handleSubmit = e => {
-    this.props.history.push(``);
-  };
 
   render() {
     // console.log(this.state.pstatement);
@@ -61,11 +60,12 @@ class Problem extends React.Component {
         <h1>PROBLEM</h1>
         <div className={classes.problem}>
           <h2>{this.state.pname} </h2>
-          <div
+          <div>{ReactHtmlParser(this.state.pstatement)}</div>
+          {/* <div
             dangerouslySetInnerHTML={{
               __html: this.state.pstatement
             }}
-          />
+          /> */}
           <hr></hr>
         </div>
 
