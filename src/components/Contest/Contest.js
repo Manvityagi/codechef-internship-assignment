@@ -126,10 +126,10 @@ class Contest extends React.Component {
             </div>
           ) : (
             <>
-              <Timer
+              <Timer 
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
-              ></Timer>
+              ></Timer> 
               <p style={{ textAlign: "center", fontSize: "20px" }}>
                 This contest has no problems
               </p>
