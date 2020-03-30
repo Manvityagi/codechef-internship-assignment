@@ -18,7 +18,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 81ea87244c22719bce35df771581033585497aef`
+        Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
       }
     })
       .then(res => {
@@ -57,7 +57,7 @@ class Contest extends React.Component {
           <div className={classes.header}>
             <img
               className={classes.himage}
-              src={require("../assets/logo.svg")}
+              src={require("../assets/finalLogo.jpeg")}
               alt="CodeChef"
             />
           </div>
@@ -127,6 +127,9 @@ class Contest extends React.Component {
             </div>
           )}
         </div>
+
+              <Submissions contestCode = {this.contestCode}></Submissions>
+
       </div>
     );
   }

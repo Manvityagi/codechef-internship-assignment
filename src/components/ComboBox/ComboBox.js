@@ -15,7 +15,7 @@ class ComboBox extends React.Component {
       url: `https://api.codechef.com/contests/?fields=&sortBy=&sortOrder=`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer a68cdb07880d17d75dee8d58e79278cbb82d4c7a`
+        Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
       }
     })
       .then(res => {
@@ -35,7 +35,7 @@ class ComboBox extends React.Component {
           <div className={classes.header}>
             <img
               className={classes.himage}
-              src={require("../assets/logo.svg")}
+              src={require("../assets/finalLogo.jpeg")}
               alt="CodeChef"
             />
           </div>

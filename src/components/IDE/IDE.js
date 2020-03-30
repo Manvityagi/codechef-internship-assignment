@@ -41,7 +41,7 @@ class IDE extends React.Component {
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 81ea87244c22719bce35df771581033585497aef`
+        Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -60,7 +60,7 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer 81ea87244c22719bce35df771581033585497aef`
+              Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
             }
           })
             .then(res => {
