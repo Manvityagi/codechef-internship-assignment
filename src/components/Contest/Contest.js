@@ -20,7 +20,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
+        Authorization: `Bearer 6a931cad7886f20649c9dcf551439a84b281c345`
       }
     })
       .then(res => {
@@ -38,26 +38,25 @@ class Contest extends React.Component {
         console.log(err.response);
       });
 
+    axios({
+      method: "get",
+      url: `https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode${this.contestCode}=&fields=`,
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer 6a931cad7886f20649c9dcf551439a84b281c345`
+      }
+    })
+      .then(res => {
+        console.log(res);
 
-      axios({
-        method: "get",
-        url: `https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode${this.contestCode}=&fields=`,
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
-        }
+        let content = res.data.result.data.content;
+
+        this.setState({ content });
       })
-        .then(res => {
-          console.log(res);
-  
-          let content = res.data.result.data.content;
-  
-          this.setState({ content });
-        })
-        .catch(err => {
-          console.log("NOT DONE");
-          console.log(err.response);
-        });
+      .catch(err => {
+        console.log("NOT DONE");
+        console.log(err.response);
+      });
   }
 
   problemEventHandler = event => {
@@ -91,9 +90,9 @@ class Contest extends React.Component {
           &nbsp;»&nbsp;
           <h2>Contest Page - {this.contestCode}</h2>
           {!noProblems ? (
-            <div>
+            <div className={classes.MAINN}>
               <div className={classes.tableMainHeading}>
-                <b>Scorable Problems</b>
+                <b className={classes.boldd}>Scorable Problems</b>
               </div>
               <main>
                 <table>
@@ -136,6 +135,23 @@ class Contest extends React.Component {
                       </button>
                     </div>
                   </div>
+                  <button className={classes.submissionButton}
+                    onClick={() =>
+                      this.setState(prevState => ({
+                        ...prevState,
+                        show: !prevState.show
+                      }))
+                    }
+                  >
+                    +
+                  </button >
+                  {this.state.show ? (
+                    <div className={classes.submissionTable}>
+                      <Submissions content={this.state.content}></Submissions>
+                    </div>
+                  ) : (
+                    <br></br>
+                  )}
                 </div>
               </main>
             </div>
@@ -150,18 +166,6 @@ class Contest extends React.Component {
             </div>
           )}
         </div>
-
-            <button onClick={() => this.setState(prevState => ({
-              ...prevState,
-              show: !prevState.show
-            }))}>+</button>
-        {this.state.show ? (
-          <>
-            <Submissions content={this.state.content}></Submissions>
-          </>
-        ) : (
-          <br></br>
-        )}
       </div>
     );
   }
