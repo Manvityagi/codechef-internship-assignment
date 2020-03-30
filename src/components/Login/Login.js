@@ -6,7 +6,12 @@ export class Login extends Component {
   render() {
     return (
       <div className={classes.Login}>
-        <Button variant="contained" color="primary">
+        <img
+          className={classes.himageee}
+          src={require("../assets/finalLogo.jpeg")}
+          alt="CodeChef"
+        />
+        <Button className={classes.loginButton} variant="contained" color="primary">
           Login
         </Button>
       </div>

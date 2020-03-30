@@ -37,7 +37,7 @@ button:hover {
   /* margin-right: 25%; */
   margin-top: 5%;
   width: 1200px;
-  box-shadow: -1px 4px 5px 6px rgba(194, 194, 194, 1);
+  box-shadow: -1px 4px 5px 6px rgb(82, 73, 73);
   padding: 20px;
 }
 
@@ -59,7 +59,9 @@ table {
 tr:nth-child(odd) {
   background-color: #eee;
 }
-
+tr:nth-child(even) {
+  background-color: beige;
+}
 th {
   background-color: #555;
   color: #fff;
@@ -96,6 +98,7 @@ td {
   width: 200px;
   margin-left: 30%;
   border: 1px solid grey;
+  box-shadow: -1px 2px 2px 2px rgb(82, 73, 73);
   /* margin-right: 390px; */
   /* position: relative; */
   /* bottom: 290px; */
@@ -105,7 +108,8 @@ td {
   /* margin-left: 900px; */
   border: 1px solid grey;
   text-align: center;
-  margin-top: 8px;
+  margin-top: 10px;
+  box-shadow: -1px 2px 2px 2px rgb(82, 73, 73);
   /* margin-right: 390px; */
   /* position: relative; */
   /* bottom: 260px; */
