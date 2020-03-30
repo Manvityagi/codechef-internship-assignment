@@ -12,11 +12,11 @@
 }
 
 .himage {
-  height: 300px;
+  height: 90px;
   width: 300px;
-  margin-left: 350px;
+  /* margin-left: 350px;
   position: relative;
-  bottom: 80px;
+  bottom: 80px; */
 }
 
 .heading {
