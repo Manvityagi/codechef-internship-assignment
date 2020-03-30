@@ -41,7 +41,7 @@ class Submissions extends React.Component {
               <th>User</th>
               <th>Problem</th>
               <th>Result</th>
-              <th>Language</th>
+              <th>Language</th>   
             </tr>
           </thead>
           <tbody>
@@ -50,7 +50,8 @@ class Submissions extends React.Component {
               <td>{moment(sbm.date).format("Mo MMM YY")}</td>
               <td>{sbm.username}</td>
               <td>{sbm.problemCode}</td>
-              <td>{sbm.result}</td>
+
+              <td>{sbm.result.splice(0,3)}</td>
               <td>{sbm.language}</td>
             </tr>)
            )}

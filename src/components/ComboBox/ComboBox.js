@@ -10,12 +10,46 @@ class ComboBox extends React.Component {
   };
 
   componentDidMount() {
+    // let str;
+    // try {
+    //   console.log("hey");
+    //   str = window.location.href.split("=")[1].split("&")[0];
+    //   console.log(str);
+    // } catch {
+    //   console.log("Catch");
+    //   window.location.href = "http://localhost:8000/";
+    // }
+    // fetch(`http://localhost:8000/index.php/?code=${str}`, {
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //     Accept: "application/json",
+    //   },
+    //   method: "GET",
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((res) => {
+    //     // console.log(res);
+    //     var tk = res.access_token;
+    //     var rtk = res.refresh_token;
+    //     localStorage.setItem("aut_token", tk);
+    //     localStorage.setItem("ref_token", rtk);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.response);
+    //   });
+
+    // while (localStorage.getItem("aut_token") === null) {}
+
+
+
     axios({
       method: "get",
       url: `https://api.codechef.com/contests/?fields=&sortBy=&sortOrder=`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
+        // Authorization: `Bearer ${localStorage.getItem("aut_token")}`
       }
     })
       .then(res => {
