@@ -1,3 +1,8 @@
+// curl -X POST https://api.codechef.com/oauth/token -H 'content-Type: application/json' -d
+// '{"grant_type":"client_credentials" , "scope":"public", "client_id" : "7f066223fed7e3268fb739aa17e5d026", "client_secret" : "1e054c722b0bc5d8d3f7e34cdaf1f894", "redirect_uri" : "http://localhost:3000/search"
+// }
+// '
+
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -9,15 +14,27 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
-
-
-function createData(name, score, totalPenalty, carbs, protein) {
-  return { name, score, totalPenalty, carbs, protein };
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
 }
 
 const rows = [
-  
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Donut", 452, 25.0, 51, 4.9),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Honeycomb", 408, 3.2, 87, 6.5),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Jelly Bean", 375, 0.0, 94, 0.0),
+  createData("KitKat", 518, 26.0, 65, 7.0),
+  createData("Lollipop", 392, 0.2, 98, 0.0),
+  createData("Marshmallow", 318, 0, 81, 2.0),
+  createData("Nougat", 360, 19.0, 9, 37.0),
+  createData("Oreo", 437, 18.0, 63, 4.0)
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -47,11 +64,16 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: "sno", numeric: true, disablePadding: true,label: "#"},
-  { id: "score", numeric: true, disablePadding: false, label: "score" },
-  { id: "totalPenalty", numeric: true, disablePadding: false, label: "totalPenalty " },
-  { id: "carbs", numeric: true, disablePadding: false, label: "Carbs " },
-  { id: "protein", numeric: true, disablePadding: false, label: "Protein " }
+  {
+    id: "name",
+    numeric: false,
+    disablePadding: true,
+    label: "Dessert (100g serving)"
+  },
+  { id: "calories", numeric: true, disablePadding: false, label: "Calories" },
+  { id: "fat", numeric: true, disablePadding: false, label: "Fat (g)" },
+  { id: "carbs", numeric: true, disablePadding: false, label: "Carbs (g)" },
+  { id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" }
 ];
 
 function EnhancedTableHead(props) {
@@ -64,8 +86,7 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         {headCells.map(headCell => (
-          <TableCell 
-           size= 'small'
+          <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
@@ -110,23 +131,18 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
     position: "absolute",
     top: 20,
-    width: 2
+    width: 1
   }
 }));
 
 export default function EnhancedTable(props) {
-   let {rankarray,problems} = props;
-   const rows = [
-       rankarray.forEach(function(user,index) {
-        createData("Cupcake", 305, 3.7, 67, 4.3)     
-       })
-   ]
-
-   console.log(rankarray,problems)
+  console.log(props.rankarray)
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("score");
+  const [orderBy, setOrderBy] = React.useState("calories");
+  //   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
+  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (event, property) => {
@@ -144,7 +160,13 @@ export default function EnhancedTable(props) {
     setPage(0);
   };
 
-  
+  const handleChangeDense = event => {
+    setDense(event.target.checked);
+  };
+
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -152,7 +174,7 @@ export default function EnhancedTable(props) {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size="medium"
+            size={dense ? "small" : "medium"}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -169,18 +191,26 @@ export default function EnhancedTable(props) {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover tabIndex={-1}  key={row.name}>
-                      <TableCell width="10%" variant="head" size="medium" component="th" id={labelId} scope="row" padding="default">{row.name} </TableCell>
-                      <TableCell width="20%" size="medium" align="right">{row.score}</TableCell>
-                      <TableCell width="10%" size="medium" align="right">{row.totalPenalty}</TableCell>
+                    <TableRow hover role="checkbox" tabIndex={-1}  key={row.name}
+                    >
+                      <TableCell id={labelId} scope="row"padding="none">{row.name} </TableCell>
+                      <TableCell align="right">{row.calories}</TableCell>
+                      <TableCell align="right">{row.fat}</TableCell>
+                      <TableCell align="right">{row.carbs}</TableCell>
+                      <TableCell align="right">{row.protein}</TableCell>
                     </TableRow>
                   );
                 })}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25, 50]}
+          rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -189,7 +219,10 @@ export default function EnhancedTable(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-     
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Dense padding"
+      />
     </div>
   );
 }

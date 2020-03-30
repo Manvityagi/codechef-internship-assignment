@@ -1,3 +1,8 @@
+// curl -X POST https://api.codechef.com/oauth/token -H 'content-Type: application/json' -d
+// '{"grant_type":"client_credentials" , "scope":"public", "client_id" : "7f066223fed7e3268fb739aa17e5d026", "client_secret" : "1e054c722b0bc5d8d3f7e34cdaf1f894", "redirect_uri" : "http://localhost:3000/search"
+// }
+// '
+
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
