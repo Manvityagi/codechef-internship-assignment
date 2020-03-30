@@ -17,7 +17,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 215afac3201241400af559b57876d62faa9f81d5`
+        Authorization: `Bearer 6fc19b90fe8ef684661c4fd67f6274ce62ab7781`
       }
     })
       .then(res => {
@@ -38,7 +38,6 @@ class Contest extends React.Component {
 
   problemEventHandler = event => {
     let problemCode = event.target.getAttribute("value");
-    // console.log(event.target.getAttribute("value"));
     this.props.history.push(
       `/contests/${this.contestCode}/problems/${problemCode}`
     );
@@ -49,12 +48,6 @@ class Contest extends React.Component {
   };
 
   render() {
-    // console.log(this.state.problemList.length);
-    // why is this not working as expected
-    // if (this.state.problemList.length === 0) {
-    //   return <><h1>This contest has not started yet</h1></>;
-    // }
-
     let noProblems = this.state.problemList.length === 0;
 
     return (
@@ -70,14 +63,12 @@ class Contest extends React.Component {
         </header>
 
         <div className={classes.content}>
-          {/* <aside className={classes.breadcrumbs}> */}
           <a href="http://localhost:3000/search">Home </a>
           &nbsp;»&nbsp;
           <h2>Contest Page - {this.contestCode}</h2>
-          {/* </aside> */}
           {!noProblems ? (
             <div>
-              <div>
+              <div className={classes.tableMainHeading}>
                 <b>Scorable Problems</b>
               </div>
               <main>
@@ -115,7 +106,7 @@ class Contest extends React.Component {
                   </div>
                   <div className={classes.parent}>
                     <div className={classes.contest1}>
-                      <h3>CONTEST RANKS</h3>
+                      <h4>CONTEST RANKS</h4>
                       <button onClick={this.contestRank} type="link">
                         Go to Contest Ranks
                       </button>
@@ -125,15 +116,14 @@ class Contest extends React.Component {
               </main>
             </div>
           ) : (
-            <>
-              <Timer 
-                startDate={this.state.startDate}
-                endDate={this.state.endDate}
-              ></Timer> 
-              <p style={{ textAlign: "center", fontSize: "20px" }}>
-                This contest has no problems
-              </p>
-            </>
+            <div className={classes.contestYetToBeStarted}>
+              <div className={classes.timer}>
+                <Timer
+                  startDate={this.state.startDate}
+                  endDate={this.state.endDate}
+                ></Timer>
+              </div>
+            </div>
           )}
         </div>
       </div>

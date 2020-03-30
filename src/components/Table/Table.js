@@ -1,4 +1,5 @@
 import React from "react";
+import ownclasses from "./Table.module.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,15 +11,9 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 
-
-
 function createData(rank, name, score, totalPenalty) {
   return { rank, name, score, totalPenalty };
 }
-
-// const rows = [
-//   createData(1, "Manvi", 6, 1)
-// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -47,10 +42,15 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: "rank", numeric: true, disablePadding: true,label: "#"},
+  { id: "rank", numeric: true, disablePadding: true, label: "#" },
   { id: "username", numeric: true, disablePadding: false, label: "User Name" },
   { id: "score", numeric: true, disablePadding: false, label: "score" },
-  { id: "totalPenalty", numeric: true, disablePadding: false, label: "totalPenalty " }
+  {
+    id: "totalPenalty",
+    numeric: true,
+    disablePadding: false,
+    label: "totalPenalty "
+  }
 ];
 
 function EnhancedTableHead(props) {
@@ -63,8 +63,8 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         {headCells.map(headCell => (
-          <TableCell 
-           size= 'small'
+          <TableCell
+            size="small"
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
@@ -114,22 +114,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function EnhancedTable(props) {
-   let {rankarray,problems} = props;
-  //  const rows = [
-  //       rankarray.map(user => {
-  //           createData(user.rank,user.username);
-  //       })
-  //  ]
-  const rows = 
-    rankarray.map(user => {
-      // console.log(user.rank);
-      return createData(user.rank, user.username, user.totalScore, user.penalty)
-    })
-  
+  let { rankarray, problems } = props;
 
-   console.log(rankarray,problems)
+  const rows = rankarray.map(user => {
+    return createData(user.rank, user.username, user.totalScore, user.penalty);
+  });
+
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
+  const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("score");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -149,53 +141,61 @@ export default function EnhancedTable(props) {
     setPage(0);
   };
 
-  
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <TableContainer>
-          <Table
-            className={classes.table}
-            aria-labelledby="tableTitle"
-            size="medium"
-            aria-label="enhanced table"
-          >
-            <EnhancedTableHead
-              classes={classes}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  // const labelId = `enhanced-table-checkbox-${index}`;
+    <div className={ownclasses.rankTable}>
+      <div className={classes.root}>
+        <Paper className={classes.paper}>
+          <TableContainer>
+            <Table
+              className={classes.table}
+              aria-labelledby="tableTitle"
+              size="medium"
+              aria-label="enhanced table"
+            >
+              <EnhancedTableHead
+                classes={classes}
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    // const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow hover tabIndex={-1}  key={row.name}>
-                      <TableCell width="5%" size="medium" align="right">{row.rank}</TableCell>
-                      <TableCell width="10%" size="medium" align="right">{row.name} </TableCell>
-                      <TableCell width="10%" size="medium" align="right">{row.score}</TableCell>
-                      <TableCell width="10%" size="medium" align="right">{row.totalPenalty}</TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25, 50]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
-     
+                    return (
+                      <TableRow hover tabIndex={-1} key={row.name}>
+                        <TableCell width="5%" size="medium" align="right">
+                          {row.rank}
+                        </TableCell>
+                        <TableCell width="10%" size="medium" align="right">
+                          {row.name}{" "}
+                        </TableCell>
+                        <TableCell width="10%" size="medium" align="right">
+                          {row.score}
+                        </TableCell>
+                        <TableCell width="10%" size="medium" align="right">
+                          {row.totalPenalty}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25, 50]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </div>
     </div>
   );
 }

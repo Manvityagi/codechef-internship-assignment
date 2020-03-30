@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import { render } from "react-dom";
 import axios from "axios";
 import AceEditor from "react-ace";
@@ -41,7 +41,7 @@ class IDE extends React.Component {
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 215afac3201241400af559b57876d62faa9f81d5`
+        Authorization: `Bearer 6fc19b90fe8ef684661c4fd67f6274ce62ab7781`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -60,7 +60,7 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer 215afac3201241400af559b57876d62faa9f81d5`
+              Authorization: `Bearer 6fc19b90fe8ef684661c4fd67f6274ce62ab7781`
             }
           })
             .then(res => {
@@ -102,7 +102,7 @@ class IDE extends React.Component {
   handleOnChange(event) {
     this.setState({
       msg: event.target.value
-    })
+    });
   }
 
   render() {

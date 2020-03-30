@@ -2,8 +2,7 @@ import React from "react";
 import axios from "axios";
 import IDE from "../IDE/IDE";
 import classes from "./Problem.module.css";
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
-
+import ReactHtmlParser from "react-html-parser";
 
 class Problem extends React.Component {
   state = {
@@ -27,7 +26,7 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 215afac3201241400af559b57876d62faa9f81d5`
+        Authorization: `Bearer 6fc19b90fe8ef684661c4fd67f6274ce62ab7781`
       }
     })
       .then(res => {
@@ -52,21 +51,14 @@ class Problem extends React.Component {
       });
   }
 
-
   render() {
-    // console.log(this.state.pstatement);
     return (
       <div className={classes.Problem}>
         <h1>PROBLEM</h1>
         <div className={classes.problem}>
           <h2>{this.state.pname} </h2>
           <div>{ReactHtmlParser(this.state.pstatement)}</div>
-          {/* <div
-            dangerouslySetInnerHTML={{
-              __html: this.state.pstatement
-            }}
-          /> */}
-          <hr></hr>
+          <hr />
         </div>
 
         <h1>Successful Submissions - {this.state.successfulSubmissions}</h1>

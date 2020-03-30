@@ -1,16 +1,10 @@
 import React from "react";
+import classes from "./Timer.module.css";
 
 class Timer extends React.Component {
   state = {
-    // days: 0,
-    // hours: 0,
-    // minutes: 0,
-    // seconds: 0,
-    // date: "",
     time: {}
   };
-
-  //if(this.props.currentTime < endDateTime) = Contest Ended
 
   render() {
     let contestEndTime = Date.parse(this.props.endDate.toString());
@@ -21,52 +15,44 @@ class Timer extends React.Component {
     let contestRunning = now >= contestStartTime && now < contestEndTime;
     let distance, msg;
     if (contestRunning) {
-      distance = contestEndTime - now;  
-      msg = "Contest ends in "   
+      distance = contestEndTime - now;
+      msg = "Contest ends in ";
     } else if (contestNotStarted) {
       distance = contestStartTime - now;
-      msg = "Contest starts in "
+      msg = "Contest starts in ";
     }
     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60) );
+    let hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
     let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     if (contestRunning) {
-      if(days === 0 && hours === 0 && minutes === 0){
-        msg = `Contest ends in ${hours} hrs ${minutes} mins ${seconds} secs `;   
-      }
-      else if(days === 0) {
-        msg = `Contest ends in ${hours} hrs ${minutes} mins`;
-      } 
-      else {
-        msg = `Contest ends in ${days} days ${hours} hrs ${minutes} mins `   
+      let prefix = "Contest ends in";
+      if (days === 0 && hours === 0 && minutes === 0) {
+        msg = `${prefix} ${hours} hrs ${minutes} mins ${seconds} secs `;
+      } else if (days === 0) {
+        msg = `${prefix} ${hours} hrs ${minutes} mins`;
+      } else {
+        msg = `${prefix} ${days} days ${hours} hrs ${minutes} mins `;
       }
     } else if (contestNotStarted) {
-      if(days === 0 && hours === 0 && minutes === 0){
-        msg = `Contest starts in ${hours} hrs ${minutes} mins ${seconds} secs `;   
-      }
-      else if(days === 0) {
-        msg = `Contest starts in ${hours} hrs ${minutes} mins`;
-      } 
-      else {
-        msg = `Contest starts in ${days} days ${hours} hrs ${minutes} mins `   
+      let prefix = "Contest starts in";
+      if (days === 0 && hours === 0 && minutes === 0) {
+        msg = `${prefix} ${hours} hrs ${minutes} mins ${seconds} secs `;
+      } else if (days === 0) {
+        msg = `${prefix} ${hours} hrs ${minutes} mins`;
+      } else {
+        msg = `${prefix} ${days} days ${hours} hrs ${minutes} mins `;
       }
     }
-    
-
-    
 
     return (
-    <div>
-      <h1>Timer</h1>
-      {!contestEnded ? (
-        <p>{msg}</p> 
-      ) : (
-        <p>Contest has ended!</p>
-      )}    
+      <div className={classes.timerOfCurrentContest}>
+        {!contestEnded ? <p>{msg}</p> : <p>Contest has ended!</p>}
       </div>
-      );
+    );
   }
 }
 
