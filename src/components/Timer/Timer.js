@@ -10,55 +10,63 @@ class Timer extends React.Component {
     time: {}
   };
 
-  secondsToTime(secs) {
-    let hours = Math.floor(secs / (60 * 60));
-
-    let divisor_for_minutes = secs % (60 * 60);
-    let minutes = Math.floor(divisor_for_minutes / 60);
-
-    let divisor_for_seconds = divisor_for_minutes % 60;
-    let seconds = Math.ceil(divisor_for_seconds);
-
-    let obj = {
-      h: hours,
-      m: minutes,
-      s: seconds
-    };
-    return obj;
-  }
-
-  countDown() {
-    // Remove one second, set state so a re-render happens.
-    let seconds = Date.parse(this.props.endDate.toString()) - 1;
-    this.setState({
-      time: this.secondsToTime(seconds),
-      seconds: seconds
-    });
-
-    // Check if we're at zero.
-  }
-
-  componentDidMount() {
-    let timeLeftVar = this.secondsToTime(this.props.endDate);
-    this.setState({ time: timeLeftVar });
-    setInterval(this.countDown, 1000);
-  }
+  //if(this.props.currentTime < endDateTime) = Contest Ended
 
   render() {
-    console.log(this.props.endDate, typeof this.props.endDate);
+    let contestEndTime = Date.parse(this.props.endDate.toString());
+    let contestStartTime = Date.parse(this.props.startDate.toString());
+    let now = new Date().getTime();
+    let contestEnded = contestEndTime < now;
+    let contestNotStarted = contestStartTime > now;
+    let contestRunning = now >= contestStartTime && now < contestEndTime;
+    let distance, msg;
+    if (contestRunning) {
+      distance = contestEndTime - now;  
+      msg = "Contest ends in "   
+    } else if (contestNotStarted) {
+      distance = contestStartTime - now;
+      msg = "Contest starts in "
+    }
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60) );
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    const date = Date.parse(this.props.endDate);
+    if (contestRunning) {
+      if(days === 0 && hours === 0 && minutes === 0){
+        msg = `Contest ends in ${hours} hrs ${minutes} mins ${seconds} secs `;   
+      }
+      else if(days === 0) {
+        msg = `Contest ends in ${hours} hrs ${minutes} mins`;
+      } 
+      else {
+        msg = `Contest ends in ${days} days ${hours} hrs ${minutes} mins `   
+      }
+    } else if (contestNotStarted) {
+      if(days === 0 && hours === 0 && minutes === 0){
+        msg = `Contest starts in ${hours} hrs ${minutes} mins ${seconds} secs `;   
+      }
+      else if(days === 0) {
+        msg = `Contest starts in ${hours} hrs ${minutes} mins`;
+      } 
+      else {
+        msg = `Contest starts in ${days} days ${hours} hrs ${minutes} mins `   
+      }
+    }
+    
 
-    console.log(date);
-    console.log(this.state.time);
-    // console.log(newDate(this.props.endDate));
-    // console.log(this.props.endDate.getTime());
+    
+
     return (
-      <>
-        <h3>TIMER</h3>
-        m:{this.state.time.m} s:{this.state.time.s}
-      </>
-    );
+    <div>
+      <h1>Timer</h1>
+      {!contestEnded ? (
+        <p>{msg}</p> 
+      ) : (
+        <p>Contest has ended!</p>
+      )}    
+      </div>
+      );
   }
 }
 

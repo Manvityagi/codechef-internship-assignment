@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import { render } from "react-dom";
 import axios from "axios";
 import AceEditor from "react-ace";
@@ -41,7 +41,7 @@ class IDE extends React.Component {
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer fa0eb595c921467a8ebec137740d7e191890c26e`
+        Authorization: `Bearer c83f769e2250d9dedaf19c9d8cbd21d8f251a66d`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -60,14 +60,14 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer fa0eb595c921467a8ebec137740d7e191890c26e`
+              Authorization: `Bearer c83f769e2250d9dedaf19c9d8cbd21d8f251a66d`
             }
           })
             .then(res => {
               let output = res.data.result.data.output;
               let cmpinfo = res.data.result.data.cmpinfo;
               let stderr = res.data.result.data.stderr;
-              this.setState({output,cmpinfo,stderr });
+              this.setState({ output, cmpinfo, stderr });
             })
             .catch(err => {
               console.log("Couldnt Run to find status");
@@ -95,10 +95,20 @@ class IDE extends React.Component {
     this.setState({ input: e.target.value });
   };
 
+  // handleOutputChange = e => {
+  //   setValue(e.target.value);
+  // };
+
+  handleOnChange(event) {
+    this.setState({
+      msg: event.target.value
+    })
+  }
+
   render() {
-    console.log("output",this.state.output);
-    console.log("cmpinfo",this.state.cmpinfo);
-    console.log("stderr",this.state.stderr);
+    console.log("output", this.state.output);
+    console.log("cmpinfo", this.state.cmpinfo);
+    console.log("stderr", this.state.stderr);
 
     let msg, status;
     let isCompileInfo = this.state.cmpinfo.length === 0;
@@ -163,11 +173,15 @@ class IDE extends React.Component {
         <h3>Custom input</h3>
         <textarea rows="6" cols="141" onChange={this.changeInput}></textarea>
 
-
         {isOutputComponent ? (
           <>
             <h3>{status}</h3>
-            <p>{msg}</p>
+            <textarea
+              rows={6}
+              cols={141}
+              value={msg}
+              onChange={event => this.handleOnChange(event)}
+            ></textarea>
             {/* <textarea rows="6" cols="141">
               {msg}
             </textarea> */}
@@ -175,19 +189,6 @@ class IDE extends React.Component {
         ) : (
           <br></br>
         )}
-
-        
-
-        {/* {!isOutput ? (
-          <>
-            <h3>Output</h3>
-            <textarea rows="6" cols="141">
-              {this.state.output}
-            </textarea>
-          </>
-        ) : (
-          <br></br>
-        )} */}
       </div>
     );
   }

@@ -6,7 +6,7 @@ class Contest extends React.Component {
   state = {
     problemList: [],
     endDate: "",
-    currentTime: ""
+    startDate: ""
   };
 
   contestCode = this.props.match.params.contest_code;
@@ -17,18 +17,18 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer fa0eb595c921467a8ebec137740d7e191890c26e`
+        Authorization: `Bearer c83f769e2250d9dedaf19c9d8cbd21d8f251a66d`
       }
     })
       .then(res => {
-        // console.log(res);
+        console.log(res);
 
         res = res.data.result.data.content;
         let problemList = res.problemsList;
         let endDate = res.endDate;
-        let currentTime = res.currentTime;
+        let startDate = res.startDate;
         // console.log(endDate);
-        this.setState({ problemList, endDate, currentTime });
+        this.setState({ problemList, endDate, startDate });
       })
       .catch(err => {
         console.log("NOT DONE");
@@ -55,8 +55,13 @@ class Contest extends React.Component {
     //   return <><h1>This contest has not started yet</h1></>;
     // }
 
+    let noProblems = this.state.problemList.length === 0;
+
+    if (!noProblems) {
+    }
+
     return (
-      <>
+      <div>
         <header>
           <div className={classes.header}>
             <img
@@ -73,56 +78,64 @@ class Contest extends React.Component {
           &nbsp;»&nbsp;
           <h2>Contest Page - {this.contestCode}</h2>
           {/* </aside> */}
-          <div>
-            <b>Scorable Problems for Division 2</b>
-          </div>
-          <main>
-            <table>
-              <thead>
-                <tr>
-                  <th>Code</th>
-                  <th>Successful Submissions</th>
-                  <th>Accuracy</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.problemList.map(problem => (
-                  <tr key={problem.problemCode}>
-                    <td
-                      className={classes.problemID}
-                      value={problem.problemCode}
-                      onClick={this.problemEventHandler}
-                    >
-                      {problem.problemCode}
-                    </td>
-                    <td>{problem.successfulSubmissions}</td>
-                    <td>{problem.accuracy.toFixed(2)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
 
-            <div className={classes.rightHandPage}>
-              <div className={classes.contest}>Insert code for future</div>
-              <div className={classes.parent}>
-                <div className={classes.contest1}>
-                  <h3>CONTEST RANKS</h3>
-                  <button onClick={this.contestRank} type="link">
-                    Go to Contest Ranks
-                  </button>
+          {!noProblems ? (
+            <div>
+            <div>
+              <b>Scorable Problems for Division 2</b>
+            </div>
+            <main>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Successful Submissions</th>
+                    <th>Accuracy</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.problemList.map(problem => (
+                    <tr key={problem.problemCode}>
+                      <td
+                        className={classes.problemID}
+                        value={problem.problemCode}
+                        onClick={this.problemEventHandler}
+                      >
+                        {problem.problemCode}
+                      </td>
+                      <td>{problem.successfulSubmissions}</td>
+                      <td>{problem.accuracy.toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <div className={classes.rightHandPage}>
+                <div className={classes.contest}>Insert code for future</div>
+                <div className={classes.parent}>
+                  <div className={classes.contest1}>
+                    <h3>CONTEST RANKS</h3>
+                    <button onClick={this.contestRank} type="link">
+                      Go to Contest Ranks
+                    </button>
+                  </div>
                 </div>
               </div>
+            </main>
+        
             </div>
-          </main>
-        </div>
+          ) : (
+            <p style = {{textAlign:'center', fontSize:'20px'}}>This contest has no problems</p>
+          )}
+          </div>
+      
+
+            
         <Timer
-          currentTime={this.state.currentTime}
+          startDate={this.state.startDate}
           endDate={this.state.endDate}
         ></Timer>
-        <div className={classes.contest}>
-          Contest ends at {this.state.endDate}
-        </div>
-      </>
+      </div>
     );
   }
 }
