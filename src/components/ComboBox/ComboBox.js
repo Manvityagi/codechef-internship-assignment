@@ -15,7 +15,7 @@ class ComboBox extends React.Component {
       url: `https://api.codechef.com/contests/?fields=&sortBy=&sortOrder=`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 6fc19b90fe8ef684661c4fd67f6274ce62ab7781`
+        Authorization: `Bearer a68cdb07880d17d75dee8d58e79278cbb82d4c7a`
       }
     })
       .then(res => {
