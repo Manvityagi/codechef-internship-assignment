@@ -7,6 +7,7 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import ReactResizeDetector from "react-resize-detector";
 import classes from "./IDE.module.css";
+import CloseIcon from "@material-ui/icons/Close";
 class IDE extends React.Component {
   state = {
     sourceCode: "",
@@ -14,13 +15,15 @@ class IDE extends React.Component {
     input: "",
     output: "",
     status: "",
-    memory: "",
+    memory: 0,
     date: "",
     time: "",
     stderr: "",
     cmpinfo: "",
     editorHeight: 400,
-    editorWidth: "auto"
+    editorWidth: "auto",
+    showoutput: true,
+    CustomInput: false
   };
 
   onResize = (w, h) => {
@@ -31,17 +34,12 @@ class IDE extends React.Component {
   };
 
   handleRun = () => {
-    // if (this.state.sourceCode.length === 0) {
-    //   console.log("Language Not Selected");
-    //   return;
-    // }
-
     axios({
       method: "post",
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 8d610463c70a61d67d31e915583092f8b2b302c2`
+        Authorization: `Bearer 2c6ef1834321a9c94ceeb957aa44675f8b1d37f5`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -60,14 +58,14 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer 8d610463c70a61d67d31e915583092f8b2b302c2`
+              Authorization: `Bearer a58b4022180568338134ed334774587fbc960c75`
             }
           })
             .then(res => {
-              let output = res.data.result.data.output;
-              let cmpinfo = res.data.result.data.cmpinfo;
-              let stderr = res.data.result.data.stderr;
-              this.setState({ output, cmpinfo, stderr });
+              console.log(res);
+              res = res.data.result.data;
+              let { output, cmpinfo, stderr, date, time, memory } = res;
+              this.setState({ output, cmpinfo, stderr, date, time, memory });
             })
             .catch(err => {
               console.log("Couldnt Run to find status");
@@ -166,19 +164,53 @@ class IDE extends React.Component {
           <button className={classes.submit} onClick={this.handleSubmit}>
             Submit
           </button>
+          <button
+            style={{ marginLeft: "45%" }}
+            onClick={() =>
+              this.setState(prevState => ({
+                ...prevState,
+                CustomInput: !prevState.CustomInput
+              }))
+            }
+          >
+            + Custom Input
+          </button>
         </div>
 
         {/* Make a new component for this part later */}
 
-        <h3>Custom input</h3>
-        <textarea rows="6" cols="141" onChange={this.changeInput}></textarea>
-
+        {this.state.CustomInput ? (
+          <div className={classes.submissionTable}>
+            <h3>Custom input</h3>
+            <textarea
+              rows="6"
+              cols="120"
+              onChange={this.changeInput}
+            ></textarea>
+          </div>
+        ) : (
+          <>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+          </>
+        )}
         {isOutputComponent ? (
           <>
-            <h3>{status}</h3>
+            <p style={{ fontSize: "19px" }}>
+              <b>Status</b> {status} &nbsp; &nbsp; <b>Date</b> {this.state.date}{" "}
+              &nbsp; &nbsp; <b>Time</b> {this.state.time} sec &nbsp; &nbsp;{" "}
+              <b>Mem</b> {(this.state.memory / 1000).toFixed(2)} kB
+            </p>
             <textarea
               rows={6}
-              cols={141}
+              cols={120}
               value={msg}
               onChange={event => this.handleOnChange(event)}
             ></textarea>

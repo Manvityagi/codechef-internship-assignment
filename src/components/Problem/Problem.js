@@ -3,6 +3,8 @@ import axios from "axios";
 import IDE from "../IDE/IDE";
 import classes from "./Problem.module.css";
 import ReactHtmlParser from "react-html-parser";
+// const ReactMarkdown = require('react-markdown')
+const ReactMarkdown = require('react-markdown/with-html')
 
 class Problem extends React.Component {
   state = {
@@ -26,7 +28,7 @@ class Problem extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 8d610463c70a61d67d31e915583092f8b2b302c2`
+        Authorization: `Bearer 2c6ef1834321a9c94ceeb957aa44675f8b1d37f5`
       }
     })
       .then(res => {
@@ -58,7 +60,8 @@ class Problem extends React.Component {
         <h1>PROBLEM</h1>
         <div className={classes.problem}>
           <h2>{this.state.pname} </h2>
-          <div>{ReactHtmlParser(this.state.pstatement)}</div>
+          {/* <div>{ReactHtmlParser(this.state.pstatement)}</div> */}
+          <ReactMarkdown source={this.state.pstatement} escapeHtml={false}  />
           <hr />
         </div>
 

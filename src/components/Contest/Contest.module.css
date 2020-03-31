@@ -22,7 +22,6 @@ body {
   bottom: 80px; */
 }
 
-
 button {
   background-color: #2b88db;
   color: white;
@@ -37,7 +36,7 @@ button:hover {
 
 .content {
   margin-left: 20%;
-  /* margin-right: 25%; */
+  margin-right: 25%;
   margin-top: 5%;
   width: 1200px;
   box-shadow: -1px 4px 5px 6px rgb(82, 73, 73);
@@ -54,10 +53,10 @@ main {
   margin-left: 4%;
   margin-top: 2px;
 }
-
-table {
-  max-width: 100%;
-}
+  /* 
+  table {
+    max-width: 100%;
+  } */
 
 tr:nth-child(odd) {
   background-color: #eee;
@@ -75,7 +74,7 @@ td {
   text-align: left;
   padding: 0.5em 1em;
 }
-.boldd{
+.boldd {
   margin-left: 8%;
 }
 
@@ -89,12 +88,12 @@ td {
   margin-top: 2px;
   /* margin-right: 15%; */
   width: 500px;
-  height:1000px;
+  height: 1000px;
 }
 
-.submissionButton{
+.submissionButton {
   margin-top: 2%;
-  margin-left:38% ;
+  margin-left: 38%;
   padding: 8px 10px;
 }
 .contest {
@@ -125,8 +124,6 @@ td {
 .parent {
   text-align: center;
 }
-
-
 
 /*//////////////////////////////////////////////////////////*/
 

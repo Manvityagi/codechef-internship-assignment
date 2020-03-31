@@ -19,8 +19,8 @@ class Submissions extends React.Component {
           </thead>
           <tbody>
             {this.props.content.map((sbm, i) => (
-              <tr key={i}>
-                <td>{moment(sbm.date).format("Mo MMM YY")}</td>
+              <tr style={{height:"2px"}} key={i}>
+                <td >{moment(sbm.date).format("Mo MMM YY hh:mm A")}</td>
                 <td>{sbm.username}</td>
                 <td>{sbm.problemCode}</td>
 
