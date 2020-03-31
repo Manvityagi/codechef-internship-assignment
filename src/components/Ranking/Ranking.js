@@ -15,7 +15,7 @@ class Ranking extends React.Component {
       url: `https://api.codechef.com/rankings/${this.contestCode}?fields=&country=&institution=&institutionType=&offset=&limit=&sortBy=&sortOrder=`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
+        Authorization: `Bearer 8d610463c70a61d67d31e915583092f8b2b302c2`
       }
     }).then(res => {
       console.log(res);

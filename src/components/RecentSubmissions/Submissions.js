@@ -1,21 +1,20 @@
 import React from "react";
 import axios from "axios";
 import moment from "moment";
-import classes from './Submissions.module.css';
+import classes from "./Submissions.module.css";
 
 class Submissions extends React.Component {
   render() {
     return (
       <div className={classes.submissionTable}>
-        <h4 className={classes.submissionTitle}>Submissions</h4>
-        <table className={classes.sub} >
+        <table className={classes.sub}>
           <thead>
             <tr>
               <th>Date</th>
               <th>User</th>
               <th>Problem</th>
               <th>Result</th>
-              <th>Language</th>   
+              <th>Language</th>
             </tr>
           </thead>
           <tbody>
@@ -24,7 +23,12 @@ class Submissions extends React.Component {
                 <td>{moment(sbm.date).format("Mo MMM YY")}</td>
                 <td>{sbm.username}</td>
                 <td>{sbm.problemCode}</td>
-                <td>{sbm.result.splice(0,3)}</td>
+
+                {sbm.result === "manualDisqualificationByAdmin" ? (
+                  <td>Disqualified</td>
+                ) : (
+                  <td>{sbm.result}</td>
+                )}
                 <td>{sbm.language}</td>
               </tr>
             ))}

@@ -2,6 +2,9 @@ body {
   margin: 0;
   padding: 0;
 }
+#activity {
+  margin-right: 450px;
+}
 
 .header {
   -webkit-box-shadow: 0 8px 6px -6px black;
@@ -91,7 +94,8 @@ td {
 
 .submissionButton{
   margin-top: 2%;
-  margin-left:46% ;
+  margin-left:38% ;
+  padding: 8px 10px;
 }
 .contest {
   /* height: auto; */
@@ -109,6 +113,8 @@ td {
   border: 1px solid grey;
   text-align: center;
   margin-top: 10px;
+  width: 200px;
+  margin-left: 30%;
   box-shadow: -1px 2px 2px 2px rgb(82, 73, 73);
   /* margin-right: 390px; */
   /* position: relative; */
@@ -120,11 +126,6 @@ td {
   text-align: center;
 }
 
-
-.submissionTable{
-  /* width:200px; */
-
-}
 
 
 /*//////////////////////////////////////////////////////////*/

@@ -20,7 +20,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 6a931cad7886f20649c9dcf551439a84b281c345`
+        Authorization: `Bearer 8d610463c70a61d67d31e915583092f8b2b302c2`
       }
     })
       .then(res => {
@@ -43,7 +43,7 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode${this.contestCode}=&fields=`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 6a931cad7886f20649c9dcf551439a84b281c345`
+        Authorization: `Bearer 8d610463c70a61d67d31e915583092f8b2b302c2`
       }
     })
       .then(res => {
@@ -135,7 +135,7 @@ class Contest extends React.Component {
                       </button>
                     </div>
                   </div>
-                  <button className={classes.submissionButton}
+                  <button id="activity" className={classes.submissionButton}
                     onClick={() =>
                       this.setState(prevState => ({
                         ...prevState,
@@ -143,7 +143,7 @@ class Contest extends React.Component {
                       }))
                     }
                   >
-                    +
+                    + Recent Activity
                   </button >
                   {this.state.show ? (
                     <div className={classes.submissionTable}>

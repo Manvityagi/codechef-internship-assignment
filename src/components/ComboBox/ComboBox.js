@@ -50,7 +50,7 @@ class ComboBox extends React.Component {
       headers: {
         Accept: "application/json",
         // Authorization: `Bearer ${localStorage.getItem("aut_token")}`
-        Authorization: `Bearer 6a931cad7886f20649c9dcf551439a84b281c345`
+        Authorization: `Bearer 8d610463c70a61d67d31e915583092f8b2b302c2`
       }
     })
       .then(res => {

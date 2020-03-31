@@ -41,7 +41,7 @@ class IDE extends React.Component {
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
+        Authorization: `Bearer 8d610463c70a61d67d31e915583092f8b2b302c2`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -60,7 +60,7 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer 29350f8974c14b68c00e56732438d2f6574f5d0f`
+              Authorization: `Bearer 8d610463c70a61d67d31e915583092f8b2b302c2`
             }
           })
             .then(res => {
@@ -76,7 +76,7 @@ class IDE extends React.Component {
         }, 3000);
       })
       .catch(err => {
-        console.log("Couldnt Run 1");
+        console.log("Couldn't Run 1");
         console.log(err);
       });
   };
@@ -182,9 +182,6 @@ class IDE extends React.Component {
               value={msg}
               onChange={event => this.handleOnChange(event)}
             ></textarea>
-            {/* <textarea rows="6" cols="141">
-              {msg}
-            </textarea> */}
           </>
         ) : (
           <br></br>
