@@ -20,7 +20,8 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/contests/${this.contestCode}`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 2c6ef1834321a9c94ceeb957aa44675f8b1d37f5`
+        Authorization: `Bearer ${localStorage.getItem("aut_token")}`
+        // Authorization: `Bearer 2c6ef1834321a9c94ceeb957aa44675f8b1d37f5`
       }
     })
       .then(res => {
@@ -43,7 +44,8 @@ class Contest extends React.Component {
       url: `https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode${this.contestCode}=&fields=`,
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 2c6ef1834321a9c94ceeb957aa44675f8b1d37f5`
+        Authorization: `Bearer ${localStorage.getItem("aut_token")}`
+        // Authorization: `Bearer 2c6ef1834321a9c94ceeb957aa44675f8b1d37f5`
       }
     })
       .then(res => {

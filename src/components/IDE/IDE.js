@@ -8,6 +8,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 import ReactResizeDetector from "react-resize-detector";
 import classes from "./IDE.module.css";
 import CloseIcon from "@material-ui/icons/Close";
+// import Popup from "reactjs-popup";
 class IDE extends React.Component {
   state = {
     sourceCode: "",
@@ -39,7 +40,8 @@ class IDE extends React.Component {
       url: "https://api.codechef.com/ide/run",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer 2c6ef1834321a9c94ceeb957aa44675f8b1d37f5`
+        Authorization: `Bearer ${localStorage.getItem("aut_token")}`
+        // Authorization: `Bearer 2c6ef1834321a9c94ceeb957aa44675f8b1d37f5`
       },
       data: {
         sourceCode: this.state.sourceCode,
@@ -58,7 +60,8 @@ class IDE extends React.Component {
             url: `https://api.codechef.com/ide/status?link=${link}`,
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer a58b4022180568338134ed334774587fbc960c75`
+              Authorization: `Bearer ${localStorage.getItem("aut_token")}`
+              // Authorization: `Bearer a58b4022180568338134ed334774587fbc960c75`
             }
           })
             .then(res => {
@@ -79,7 +82,7 @@ class IDE extends React.Component {
       });
   };
 
-  handleSubmit = () => {};
+  handleSubmit = e => {};
 
   changeLanguage = e => {
     this.setState({ language: e.target.value });
@@ -218,6 +221,10 @@ class IDE extends React.Component {
         ) : (
           <br></br>
         )}
+
+        {/* <Popup trigger={<button> Trigger</button>} position="right center">
+          <div>Popup content here !!</div>
+        </Popup> */}
       </div>
     );
   }

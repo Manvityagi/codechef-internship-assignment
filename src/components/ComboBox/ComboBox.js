@@ -10,57 +10,86 @@ class ComboBox extends React.Component {
   };
 
   componentDidMount() {
-    // let str;
-    // try {
-    //   console.log("hey");
-    //   str = window.location.href.split("=")[1].split("&")[0];
-    //   console.log(str);
-    // } catch {
-    //   console.log("Catch");
-    //   window.location.href = "http://localhost:8000/";
-    // }
-    // fetch(`http://localhost:8000/index.php/?code=${str}`, {
-    //   headers: {
-    //     "Content-Type": "application/x-www-form-urlencoded",
-    //     Accept: "application/json",
-    //   },
-    //   method: "GET",
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((res) => {
-    //     // console.log(res);
-    //     var tk = res.access_token;
-    //     var rtk = res.refresh_token;
-    //     localStorage.setItem("aut_token", tk);
-    //     localStorage.setItem("ref_token", rtk);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.response);
-    //   });
-
-    // while (localStorage.getItem("aut_token") === null) {}
-
-
-
+    let str;
+    try {
+      // console.log("hey");
+      localStorage.setItem("aut_token", "");
+      console.log(window.location.href);
+      str = window.location.href.split("=")[1].split("&")[0];
+      // console.log(str);
+    } catch {
+      console.log("Catch");
+      window.location.href = "http://localhost:8000/";
+    }
     axios({
       method: "get",
-      url: `https://api.codechef.com/contests/?fields=&sortBy=&sortOrder=`,
       headers: {
-        Accept: "application/json",
-        // Authorization: `Bearer ${localStorage.getItem("aut_token")}`
-        Authorization: `Bearer 2c6ef1834321a9c94ceeb957aa44675f8b1d37f5`
-      }
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json"
+      },
+      url: `http://localhost:8000/index.php?code=${str}`
     })
       .then(res => {
-        res = res.data.result.data.content.contestList;
-        this.setState({ contests: res });
+        // console.log("--------->", res);
+        return JSON.parse(JSON.stringify(res));
+      })
+      .then(res => {
+        // console.log(res);
+        var tk = res.data.access_token;
+        var rtk = res.data.refresh_token;
+        // console.log(tk);
+        localStorage.setItem("aut_token", tk);
+        // console.log(localStorage.getItem("aut_token"));
+        localStorage.setItem("ref_token", rtk);
+
+        axios({
+          method: "get",
+          url: `https://api.codechef.com/contests/?fields=&sortBy=&sortOrder=`,
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("aut_token")}`
+            // Authorization: `Bearer `
+          }
+        })
+          .then(res => {
+            res = res.data.result.data.content.contestList;
+            this.setState({ contests: res });
+          })
+          .catch(err => {
+            console.log("NOT DONE");
+            console.log(err.response);
+          });
       })
       .catch(err => {
-        console.log("NOT DONE");
-        console.log(err.response);
+        console.log("ERROR");
+        console.log(err);
       });
+
+    // console.log("AUAU", localStorage.getItem("aut_token"));
+
+    // let i = 0;
+    // while (localStorage.getItem("aut_token") === "") {
+    //   console.log(i);
+    //   i += 1;
+    // }
+
+    // axios({
+    //   method: "get",
+    //   url: `https://api.codechef.com/contests/?fields=&sortBy=&sortOrder=`,
+    //   headers: {
+    //     Accept: "application/json",
+    //     Authorization: `Bearer ${localStorage.getItem("aut_token")}`
+    //     // Authorization: `Bearer `
+    //   }
+    // })
+    //   .then(res => {
+    //     res = res.data.result.data.content.contestList;
+    //     this.setState({ contests: res });
+    //   })
+    //   .catch(err => {
+    //     console.log("NOT DONE");
+    //     console.log(err.response);
+    //   });
   }
 
   render() {
