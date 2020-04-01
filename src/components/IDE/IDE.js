@@ -8,6 +8,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 import ReactResizeDetector from "react-resize-detector";
 import classes from "./IDE.module.css";
 import CloseIcon from "@material-ui/icons/Close";
+import Popup from "../Popup/Popup";
 // import Popup from "reactjs-popup";
 class IDE extends React.Component {
   state = {
@@ -24,7 +25,8 @@ class IDE extends React.Component {
     editorHeight: 400,
     editorWidth: "auto",
     showoutput: true,
-    CustomInput: false
+    CustomInput: false,
+    submitOutput: false
   };
 
   onResize = (w, h) => {
@@ -82,7 +84,22 @@ class IDE extends React.Component {
       });
   };
 
-  handleSubmit = e => {};
+  handleSubmit = e => {
+    console.log("submit clicked");
+    
+    this.setState(prevState => ({
+      ...prevState,
+      submitOutput: !prevState.submitOutput
+    }));
+  };
+
+  togglePopup = e => {
+    console.log("close button on popu clicked");
+    this.setState(prevState => ({
+      ...prevState,
+      submitOutput: !prevState.submitOutput
+    }));
+  };
 
   changeLanguage = e => {
     this.setState({ language: e.target.value });
@@ -110,6 +127,7 @@ class IDE extends React.Component {
     console.log("output", this.state.output);
     console.log("cmpinfo", this.state.cmpinfo);
     console.log("stderr", this.state.stderr);
+    console.log("submitoutput", this.state.submitOutput);
 
     let msg, status;
     let isCompileInfo = this.state.cmpinfo.length === 0;
@@ -221,6 +239,15 @@ class IDE extends React.Component {
         ) : (
           <br></br>
         )}
+
+        {/* <Popup text="Submitted Successfully"></Popup> */}
+
+        {this.state.submitOutput ? (
+          <Popup
+            text='Click "Close Button" to hide popup'
+            closePopup={this.togglePopup}
+          />
+        ) : null}
 
         {/* <Popup trigger={<button> Trigger</button>} position="right center">
           <div>Popup content here !!</div>
