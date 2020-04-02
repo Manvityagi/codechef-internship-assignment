@@ -73,20 +73,72 @@ class IDE extends React.Component {
               this.setState({ output, cmpinfo, stderr, date, time, memory });
             })
             .catch(err => {
-              console.log("Couldnt Run to find status");
+              console.log("Couldnt Run to find status - 2nd api in run");
               console.log(err);
+              if (localStorage.getItem("ref_token") === null) {
+                window.location.href = `http://localhost:8000/index.php`;
+              } else {
+                fetch(
+                  `http://localhost:8000/index.php?ref_token=${localStorage.getItem(
+                    "ref_token"
+                  )}`,
+                  {
+                    headers: {
+                      "Content-Type": "application/x-www-form-urlencoded",
+                      Accept: "application/json"
+                    },
+                    method: "GET"
+                  }
+                )
+                  .then(res => {
+                    return res.json();
+                  })
+                  .then(res => {
+                    var tk = res.access_token;
+                    var rtk = res.refresh_token;
+                    localStorage.setItem("aut_token", tk);
+                    localStorage.setItem("ref_token", rtk);
+                    this.getContestList();
+                  });
+              }
             });
         }, 3000);
       })
       .catch(err => {
         console.log("Couldn't Run 1");
         console.log(err);
+        if (localStorage.getItem("ref_token") === null) {
+          window.location.href = `http://localhost:8000/index.php`;
+        } else {
+          fetch(
+            `http://localhost:8000/index.php?ref_token=${localStorage.getItem(
+              "ref_token"
+            )}`,
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Accept: "application/json"
+              },
+              method: "GET"
+            }
+          )
+            .then(res => {
+              return res.json();
+            })
+            .then(res => {
+              var tk = res.access_token;
+              var rtk = res.refresh_token;
+              localStorage.setItem("aut_token", tk);
+              localStorage.setItem("ref_token", rtk);
+              this.handleRun();
+            });
+        }
       });
   };
 
   handleSubmit = e => {
     console.log("submit clicked");
-    
+
     this.setState(prevState => ({
       ...prevState,
       submitOutput: !prevState.submitOutput
@@ -94,7 +146,7 @@ class IDE extends React.Component {
   };
 
   togglePopup = e => {
-    console.log("close button on popu clicked");
+    console.log("close button on popup clicked");
     this.setState(prevState => ({
       ...prevState,
       submitOutput: !prevState.submitOutput
@@ -243,10 +295,7 @@ class IDE extends React.Component {
         {/* <Popup text="Submitted Successfully"></Popup> */}
 
         {this.state.submitOutput ? (
-          <Popup
-            text='Click "Close Button" to hide popup'
-            closePopup={this.togglePopup}
-          />
+          <Popup text="Submitted Successfully" closePopup={this.togglePopup} />
         ) : null}
 
         {/* <Popup trigger={<button> Trigger</button>} position="right center">

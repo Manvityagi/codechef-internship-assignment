@@ -22,7 +22,7 @@ class Problem extends React.Component {
   contestCode = this.props.match.params.contest_code;
   problemCode = this.props.match.params.problem_code;
 
-  componentDidMount() {
+  getProblem = () => {
     axios({
       method: "get",
       url: `https://api.codechef.com/contests/${this.contestCode}/problems/${this.problemCode}`,
@@ -51,7 +51,37 @@ class Problem extends React.Component {
       .catch(err => {
         console.log("NOT DONE");
         console.log(err);
+        if (localStorage.getItem("ref_token") === null) {
+          window.location.href = `http://localhost:8000/index.php`;
+        } else {
+          fetch(
+            `http://localhost:8000/index.php?ref_token=${localStorage.getItem(
+              "ref_token"
+            )}`,
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Accept: "application/json"
+              },
+              method: "GET"
+            }
+          )
+            .then(res => {
+              return res.json();
+            })
+            .then(res => {
+              var tk = res.access_token;
+              var rtk = res.refresh_token;
+              localStorage.setItem("aut_token", tk);
+              localStorage.setItem("ref_token", rtk);
+              this.getProblem();
+            });
+        }
       });
+  };
+
+  componentDidMount() {
+    this.getProblem();
   }
 
   render() {

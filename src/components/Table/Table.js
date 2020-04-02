@@ -117,6 +117,12 @@ export default function EnhancedTable(props) {
   let { rankarray, problems } = props;
 
   const rows = rankarray.map(user => {
+    //make a problem score array here 
+    console.log(user.problemScore);
+    // const problemScores = user.problemScore.map(pblm => {
+    //   return pblm.score;
+    // });
+    // console.log("scoress",problemScores)
     return createData(user.rank, user.username, user.totalScore, user.penalty);
   });
 

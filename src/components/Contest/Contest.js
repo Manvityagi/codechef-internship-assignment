@@ -14,7 +14,7 @@ class Contest extends React.Component {
 
   contestCode = this.props.match.params.contest_code;
 
-  componentDidMount() {
+  getproblems = () => {
     axios({
       method: "get",
       url: `https://api.codechef.com/contests/${this.contestCode}`,
@@ -37,8 +37,36 @@ class Contest extends React.Component {
       .catch(err => {
         console.log("NOT DONE");
         console.log(err.response);
+        if (localStorage.getItem("ref_token") === null) {
+          window.location.href = `http://localhost:8000/index.php`;
+        } else {
+          fetch(
+            `http://localhost:8000/index.php?ref_token=${localStorage.getItem(
+              "ref_token"
+            )}`,
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Accept: "application/json"
+              },
+              method: "GET"
+            }
+          )
+            .then(res => {
+              return res.json();
+            })
+            .then(res => {
+              var tk = res.access_token;
+              var rtk = res.refresh_token;
+              localStorage.setItem("aut_token", tk);
+              localStorage.setItem("ref_token", rtk);
+              this.getproblems();
+            });
+        }
       });
+  };
 
+  getsubmissions = () => {
     axios({
       method: "get",
       url: `https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode${this.contestCode}=&fields=`,
@@ -58,7 +86,38 @@ class Contest extends React.Component {
       .catch(err => {
         console.log("NOT DONE");
         console.log(err.response);
+        if (localStorage.getItem("ref_token") === null) {
+          window.location.href = `http://localhost:8000/index.php`;
+        } else {
+          fetch(
+            `http://localhost:8000/index.php?ref_token=${localStorage.getItem(
+              "ref_token"
+            )}`,
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Accept: "application/json"
+              },
+              method: "GET"
+            }
+          )
+            .then(res => {
+              return res.json();
+            })
+            .then(res => {
+              var tk = res.access_token;
+              var rtk = res.refresh_token;
+              localStorage.setItem("aut_token", tk);
+              localStorage.setItem("ref_token", rtk);
+              this.getsubmissions();
+            });
+        }
       });
+  };
+
+  componentDidMount() {
+    this.getproblems();
+    this.getsubmissions();
   }
 
   problemEventHandler = event => {
@@ -137,7 +196,9 @@ class Contest extends React.Component {
                       </button>
                     </div>
                   </div>
-                  <button id="activity" className={classes.submissionButton}
+                  <button
+                    id="activity"
+                    className={classes.submissionButton}
                     onClick={() =>
                       this.setState(prevState => ({
                         ...prevState,
@@ -146,7 +207,7 @@ class Contest extends React.Component {
                     }
                   >
                     + Recent Activity
-                  </button >
+                  </button>
                   {this.state.show ? (
                     <div className={classes.submissionTable}>
                       <Submissions content={this.state.content}></Submissions>

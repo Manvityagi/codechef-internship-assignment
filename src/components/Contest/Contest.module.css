@@ -15,6 +15,7 @@ body {
 }
 
 .himage {
+  margin-left: 12%;
   height: 90px;
   width: 300px;
   /* margin-left: 350px;
@@ -35,10 +36,12 @@ button:hover {
 }
 
 .content {
-  margin-left: 20%;
+  margin-left: 12%;
   margin-right: 25%;
   margin-top: 5%;
   width: 1200px;
+  height: 1500px;
+  /* background-color: rgb(228, 240, 67); */
   box-shadow: -1px 4px 5px 6px rgb(82, 73, 73);
   padding: 20px;
 }
@@ -53,7 +56,7 @@ main {
   margin-left: 4%;
   margin-top: 2px;
 }
-  /* 
+/* 
   table {
     max-width: 100%;
   } */
