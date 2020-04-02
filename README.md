@@ -1,6 +1,6 @@
 # Introduction
 
-![](https://github.com/Manvityagi/CodingMindsAcademy/raw/master/images/landing.png)
+![](https://github.com/Manvityagi/CodingMindsAcademy/raw/master/images/Landing.png)
 
 **CodingMindsAcademy** is the gymming-area for code-enthusiasts. It's like an open-academy of coding minds where coders can come , practice, hone and show off their skills. With numerous contests and a variety of coding problems fetched through Codechef’s API, practicing here along with a community definitely can add on greatly to the problem-solving skills of a coder.
 
